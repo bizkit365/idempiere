@@ -3852,7 +3852,38 @@ public abstract class PO
 				return false;
 			}
 		}
-
+		//*************************************************************************
+		// INSERTED BY SATISH VIJAYAN 04/01/2020
+		// NEED TO ALLOW IMPORT OF ACCOUNTING COMBINATIONS
+		// Adding ID field to *_Acct tables.
+		// This section generates a ID if the id field exists
+		// also puts a default value into the 'Value' field if it exists
+		String sAcct_ID_Column_Name=""; 
+		String sAcct_Value_Column_Name="";
+		int iAcct_ID=0;
+		String sAcct_Value="";
+		int Acct_ID_ColumnID=0;
+		int Acct_Value_ColumnID=0;
+		Acct_ID_ColumnID = DB.getSQLValue(get_TrxName(), 
+				"SELECT col.AD_Column_ID FROM AD_Column col INNER JOIN AD_Table tbl ON col.AD_Table_ID = tbl.AD_Table_ID WHERE tbl.TableName=? AND col.ColumnName=?",
+				acctTable, acctTable+"_ID");
+		if (Acct_ID_ColumnID>0) {
+			sAcct_ID_Column_Name = "," + acctTable + "_ID";
+			iAcct_ID = DB.getNextID(getAD_Client_ID(), acctTable, m_trxName);
+		}
+		
+		Acct_Value_ColumnID = DB.getSQLValue(get_TrxName(), 
+				"SELECT col.AD_Column_ID FROM AD_Column col INNER JOIN AD_Table tbl ON col.AD_Table_ID = tbl.AD_Table_ID WHERE tbl.TableName=? AND col.ColumnName=?",
+				acctTable, "Value");
+		if (Acct_Value_ColumnID>0) {
+			sAcct_Value_Column_Name = "," + "Value";
+			String sParent_Table=get_TableName();
+			sAcct_Value = "'" +
+					DB.getSQLValueString(get_TrxName(), 
+					"SELECT Value FROM "+ sParent_Table + " where " + sParent_Table +"_ID" + " = ?",
+					get_ID()) +"'";
+		}
+		//*************************************************************************
 		//	Create SQL Statement - INSERT
 		StringBuilder sb = new StringBuilder("INSERT INTO ")
 			.append(acctTable)
@@ -3869,6 +3900,12 @@ public abstract class PO
 				acctTable, PO.getUUIDColumnName(acctTable));
 		if (uuidColumnId > 0 && uuidFunction)
 			sb.append(",").append(PO.getUUIDColumnName(acctTable));
+		
+		//*********************************SATISH VIJAYAN 04/01/2020
+		if (Acct_ID_ColumnID >0 ) sb.append(sAcct_ID_Column_Name);
+		if (Acct_Value_ColumnID >0 ) sb.append(sAcct_Value_Column_Name);
+		//************************************************************
+		
 		//	..	SELECT
 		sb.append(") SELECT ").append(get_ID())
 			.append(", p.C_AcctSchema_ID, p.AD_Client_ID,0,'Y', SysDate,")
@@ -3878,6 +3915,12 @@ public abstract class PO
 		//uuid column
 		if (uuidColumnId > 0 && uuidFunction)
 			sb.append(",generate_uuid()");
+		
+		//*********************************SATISH VIJAYAN 04/01/2020
+		if (Acct_ID_ColumnID >0 ) sb.append("," + iAcct_ID);
+		if (Acct_Value_ColumnID >0 ) sb.append("," + sAcct_Value);
+		//************************************************************
+
 		//	.. 	FROM
 		sb.append(" FROM ").append(acctBaseTable)
 			.append(" p WHERE p.AD_Client_ID=").append(getAD_Client_ID());

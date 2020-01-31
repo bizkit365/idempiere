@@ -1,0 +1,15 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: Chuboe.Trialbalance2
+Bundle-SymbolicName: com.chuboe.trialbalance2;singleton:=true
+Bundle-Version: 1.0.1.qualifier
+Bundle-Vendor: CHUBOE
+Bundle-RequiredExecutionEnvironment: JavaSE-1.8
+Require-Bundle: org.adempiere.base;bundle-version="2.1.0",
+ org.adempiere.plugin.utils;bundle-version="2.1.0"
+Bundle-Activator: org.adempiere.plugin.utils.AdempiereActivator
+Service-Component: OSGI-INF/*.xml
+Bundle-ActivationPolicy: lazy
+Import-Package: org.compiere.model,
+ org.osgi.service.event;version="1.2.0"
+Automatic-Module-Name: com.chuboe.trialbalance2
