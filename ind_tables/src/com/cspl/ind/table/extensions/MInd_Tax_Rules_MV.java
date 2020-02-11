@@ -33,7 +33,7 @@ public class MInd_Tax_Rules_MV extends X_Ind_Tax_Rules_MV
 ///// RELATES TO THE PGADMIN FUNCTION CALL TO Get_Ind_HSN_Tax_Details
 	private static String sGetTaxDetails 					= "get_Ind_hsn_tax_details";
 	private static String sColumnName_Tax_ID 				= "ret_c_Tax_id";
-	private static String sColumnName_Tax_Category_ID 		= "ret_Tax_category_id";
+	private static String sColumnName_Tax_Category_ID 		= "ret_tax_category_id";
 	private static String sColumnName_Buyer_entity_Type_ID 	= "ret_ind_buyer_tax_entity_type_id";
 	private static String sColumnName_Seller_entity_Type_ID	= "ret_ind_seller_tax_entity_type_id";
 	private static String sColumnName_GST_Rate 				= "ret_gst_rate";
@@ -142,7 +142,7 @@ public class MInd_Tax_Rules_MV extends X_Ind_Tax_Rules_MV
 		return  ps.executeQuery();
 	}
 	
-	public static ResultSet GetTaxCursor (int iClient_ID, int iItem_ID
+		public static ResultSet GetTaxCursor (int iClient_ID, int iItem_ID
 			,String sColumnName,String  sTaxCategory 
 			,boolean isCharge, Timestamp InvoiceDate 
 			) throws SQLException

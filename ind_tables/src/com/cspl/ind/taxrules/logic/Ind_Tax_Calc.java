@@ -138,50 +138,65 @@ public class Ind_Tax_Calc
 	
 	public String processInvoiceLine(Properties ctx, MInvoiceLine mil) 
 	{
-		//MInvoice mParm_Inv = new MInvoice(ctx, Integer.parseInt(ctx.getProperty(MInvoice.COLUMNNAME_C_Invoice_ID)), null);
-		//boolean isOK=false;
+		if(mParm_Inv==null)  setInd_Inv_Params (ctx, mil.getParent());
+		return  getGST_Tax_ID(mil)
+						; // gets the tax ID
+	}
+	public String processInvoiceLine(Properties ctx, MInvoice mi, String Item, boolean isProduct) 
+	{
 		try
 		{
 			
-			if(mParm_Inv==null)  setInd_Inv_Params (ctx, mil.getParent());
-			return  getGST_Tax_ID(mil)
-							; // gets the tax ID
+			if(mParm_Inv==null)  setInd_Inv_Params (ctx, mi);
+			return  getGST_Tax_ID(Item, isProduct); // gets the tax ID
 		
 			//sC_Tax_ID = (sC_Tax_ID==null? "0" : sC_Tax_ID);
 		
 		}  catch (SQLException e) 
 		{
-			log.saveError("Ind_Tax_Calc:ProcessInvoiceLine ERROR:", e);
+			log.saveError("Error in Ind_Tax_Calc.java-ProcessInvoiceLine-New Line ERROR:", e);
 			//isOK=false;
 			return null;
 		}
-		//return isOK;
 	}
-	private String getGST_Tax_ID(MInvoiceLine mil) throws SQLException 
+	
+	
+	
+	private String getGST_Tax_ID(MInvoiceLine mil) //throws SQLException 
 	{
 		
-		String sRS_TaxCat="", sRS_SellerTaxEntType="", sRS_BuyerTaxEntType="", sRS_isLocal="";
-		ResultSet rs;
-		String Item_ID;
+		String item;
 		boolean isProduct;
 		
 		if(mil.getM_Product_ID()!=0)
 		{
-			Item_ID = Integer.toString(mil.getM_Product_ID());
+			item = Integer.toString(mil.getM_Product_ID());
 			isProduct=true;
 		}
 		else
 		{
-			Item_ID = Integer.toString(mil.getC_Charge_ID());
+			item = Integer.toString(mil.getC_Charge_ID());
 			isProduct=false;
 		}
-			
+		try
+		{
+			return getGST_Tax_ID(item, isProduct);
+		} catch (SQLException e) {
+			log.saveError("Error in Ind_Tax_Calc.java-gstGST_Tax_ID ERROR:", e);
+			return null;
+		}
+	}
+		
+	private String getGST_Tax_ID(String item, boolean isProduct)  throws SQLException
+	{
+		String sRS_TaxCat="", sRS_SellerTaxEntType="", sRS_BuyerTaxEntType="", sRS_isLocal="";
+		ResultSet rs;
 
-//////////////////////////////////// TAX RATE
+
 		try {
 			
 			rs = MInd_Tax_Rules_MV.GetTaxCursor(iClient_ID, 
-					Integer.parseInt(Item_ID) 
+					Integer.parseInt(item) 
 					,isProduct? MInvoiceLine.COLUMNNAME_M_Product_ID:MInvoiceLine.COLUMNNAME_C_Charge_ID 
 					,MInd_Tax_Rules_MV.sTaxCategory_GST 
 					,!isProduct, 
@@ -195,6 +210,7 @@ public class Ind_Tax_Calc
 				sRS_BuyerTaxEntType = rs.getString(Ind_Tax_Calc.sColumnName_Buyer_entity_Type_ID);
 				sRS_isLocal=rs.getString(Ind_Tax_Calc.sColumnName_isLocal);
 				
+								
 				if( sTax_Category_ID_GST.equalsIgnoreCase(sRS_TaxCat) ) //FOR GST ONLY
 				{
 					if(
@@ -207,12 +223,13 @@ public class Ind_Tax_Calc
 			
 		} catch (SQLException e) 
 		{
-			log.saveError("Ind_Tax_Calc ERROR:", e);
-		}
-		
-		
+			log.saveError("Ind_Tax_Calc-CalcGST_Tax_ID ERROR:", e);
+		}		
 		return sStandard_Tax_ID;
 	}
+		
+		
+	
 	private void setInd_Inv_Params(Properties ctx, MInvoice mi)
 	{
 		try
