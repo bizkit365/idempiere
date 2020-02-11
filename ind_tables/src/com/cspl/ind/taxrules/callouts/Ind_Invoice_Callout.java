@@ -43,16 +43,12 @@ private boolean ProcessTax(Properties ctx, int windowNo, GridTab mTab, GridField
 	String sC_Tax_ID;
 	Ind_Tax_Calc ITC = new Ind_Tax_Calc(ctx, mTab, mField);
 	int i= mTab.getCurrentRow();
-	MInvoiceLine mil = (MInvoiceLine) ( mTab.getTableModel().getPO(i)  );
+	//MInvoiceLine mil = (MInvoiceLine) ( mTab.getTableModel().getPO(i)  );
 	MInvoice mi = (MInvoice) (mTab.getParentTab().getTableModel().getPO(0) );
 	
-	if (mil != null) sC_Tax_ID = ITC.processInvoiceLine(ctx, mil);
-	else 
-	{
-		boolean isProduct = mField.getColumnName().equalsIgnoreCase(MInvoiceLine.COLUMNNAME_M_Product_ID);
-		String Item_ID=mField.getValue().toString();
-		sC_Tax_ID=ITC.processInvoiceLine(ctx, mi, Item_ID, isProduct);
-	}
+	boolean isProduct = mField.getColumnName().equalsIgnoreCase(MInvoiceLine.COLUMNNAME_M_Product_ID);
+	String Item_ID=mField.getValue().toString();
+	sC_Tax_ID=ITC.processInvoiceLine(ctx, mi, Item_ID, isProduct);
 	if (sC_Tax_ID!=null) 
 	{ 
 		mTab.setValue ( MInvoiceLine.COLUMNNAME_C_Tax_ID, Integer.parseInt(sC_Tax_ID) );
