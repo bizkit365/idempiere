@@ -1,5 +1,5 @@
 
-package com.cspl.ind.table.extensions;
+package com.cspl.ind.tables;
 
 import java.math.BigDecimal;
 import java.sql.PreparedStatement;
@@ -15,9 +15,7 @@ import org.compiere.util.CLogger;
 import org.compiere.util.DB;
 import org.compiere.util.Env;
 
-import com.cspl.ind.tables.I_Ind_Tax_Rules_MV;
-import com.cspl.ind.tables.X_Ind_Tax_Rules_MV;
-import com.cspl.ind.taxrules.callouts.Ind_Invoice_Callout;
+//import com.cspl.ind.taxrules.callouts.Ind_Invoice_Callout;
 
 import java.sql.Timestamp;
 

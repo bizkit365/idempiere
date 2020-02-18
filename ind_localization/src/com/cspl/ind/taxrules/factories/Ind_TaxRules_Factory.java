@@ -10,11 +10,12 @@ import org.adempiere.base.IColumnCalloutFactory;
 //import com.cspl.ind.taxrules.callouts.*;
 import com.cspl.ind.taxrules.callouts.*;
 
-import org.compiere.model.MInvoice;
+//import org.compiere.model.MInvoice;
 //import org.compiere.model.I_C_Tax;
 import org.compiere.model.MInvoiceLine;
 import org.compiere.model.MPayment;
-import com.cspl.ind.table.extensions.*;
+import com.cspl.ind.tables.*;
+//import com.cspl.ind.tables.IND_C_Payment;
 
 public class Ind_TaxRules_Factory implements IColumnCalloutFactory
 {

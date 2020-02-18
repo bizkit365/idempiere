@@ -1,4 +1,4 @@
-package com.cspl.ind.table.extensions;
+package com.cspl.ind.tables;
 
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -8,9 +8,6 @@ import java.util.Properties;
 
 import org.compiere.util.CLogger;
 import org.compiere.util.DB;
-
-import com.cspl.ind.tables.X_Ind_Tax_Entity_Type;
-//import com.cspl.ind.taxrules.callouts.Ind_Invoice_Callout;
 
 public class MInd_Tax_Entity_Type extends X_Ind_Tax_Entity_Type
 {

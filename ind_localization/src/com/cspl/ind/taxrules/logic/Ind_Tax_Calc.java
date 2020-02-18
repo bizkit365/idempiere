@@ -33,7 +33,7 @@ import org.compiere.util.DB;
 import org.compiere.util.Env;
 import org.compiere.util.Trx;
 
-import com.cspl.ind.table.extensions.*;
+//import com.cspl.ind.table.extensions.*;
 
 import com.cspl.ind.tables.*;
 //import com.cspl.ind.taxrules.callouts.Ind_Invoice_Callout;

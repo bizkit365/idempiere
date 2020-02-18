@@ -12,7 +12,7 @@ import org.compiere.model.MTax;
 import org.compiere.util.CLogger;
 import org.compiere.util.Env;
 
-import com.cspl.ind.table.extensions.IND_C_Payment;
+import com.cspl.ind.tables.IND_C_Payment;
 
 public class Ind_Payment_Tax_Callout implements IColumnCallout 
 {

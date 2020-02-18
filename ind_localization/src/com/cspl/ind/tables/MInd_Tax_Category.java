@@ -1,4 +1,4 @@
-package com.cspl.ind.table.extensions;
+package com.cspl.ind.tables;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -7,7 +7,7 @@ import java.util.Properties;
 import org.compiere.util.CLogger;
 import org.compiere.util.DB;
 
-import com.cspl.ind.tables.*;
+//import com.cspl.ind.tables.*;
 
 public class MInd_Tax_Category extends X_Ind_Tax_Category
 {

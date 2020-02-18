@@ -1,4 +1,4 @@
-package com.cspl.ind.table.extensions;
+package com.cspl.ind.tables;
 
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -8,8 +8,6 @@ import java.util.Properties;
 import org.compiere.model.I_C_Location;
 import org.compiere.util.CLogger;
 import org.compiere.util.DB;
-
-import com.cspl.ind.tables.X_Ind_Statutory_BPartner;
 
 public class MInd_Statutory_BPartner extends X_Ind_Statutory_BPartner
 {

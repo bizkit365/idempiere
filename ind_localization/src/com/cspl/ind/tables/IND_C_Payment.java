@@ -1,4 +1,4 @@
-package com.cspl.ind.table.extensions;
+package com.cspl.ind.tables;
 
 import java.math.BigDecimal;
 
