@@ -1500,7 +1500,7 @@ DataStatusListener, IADTabpanel, IdSpace, IFieldEditorContainer
         	listPanel.dynamicDisplay(col);
         	if (GridTable.DATA_REFRESH_MESSAGE.equals(e.getAD_Message()) || 
         		"Sorted".equals(e.getAD_Message())) {
-        		Clients.resize(listPanel.getListbox());
+        		listPanel.getListbox().invalidate();
         	}
         }
     }
@@ -1653,7 +1653,7 @@ DataStatusListener, IADTabpanel, IdSpace, IFieldEditorContainer
 		if (listPanel.isVisible()) {
 			listPanel.refresh(gridTab);
 			listPanel.scrollToCurrentRow();
-			Clients.resize(listPanel.getListbox());
+			listPanel.getListbox().invalidate();
 		} else {
 			listPanel.deactivate();
 		}
@@ -1880,7 +1880,11 @@ DataStatusListener, IADTabpanel, IdSpace, IFieldEditorContainer
 				continue;
 			}
 			if (found) {
-				if (editor.isVisible() && editor.isReadWrite()) {
+				if (editor.isVisible() && editor.isReadWrite()
+					// note, no auto focus on next button - if interested in
+					// focusing next button must implement to check if the button
+					// is just showin in toolbar, just focus on window fields must be auto focused
+					&& ! (editor instanceof WButtonEditor)) {
 					focusToEditor(editor, false);
 					break;
 				}
