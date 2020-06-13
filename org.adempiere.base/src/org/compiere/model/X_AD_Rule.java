@@ -30,7 +30,7 @@ public class X_AD_Rule extends PO implements I_AD_Rule, I_Persistent
 	/**
 	 *
 	 */
-	private static final long serialVersionUID = 20200413L;
+	private static final long serialVersionUID = 20191121L;
 
     /** Standard Constructor */
     public X_AD_Rule (Properties ctx, int AD_Rule_ID, String trxName)
@@ -71,8 +71,8 @@ public class X_AD_Rule extends PO implements I_AD_Rule, I_Persistent
 
     public String toString()
     {
-      StringBuilder sb = new StringBuilder ("X_AD_Rule[")
-        .append(get_ID()).append(",Name=").append(getName()).append("]");
+      StringBuffer sb = new StringBuffer ("X_AD_Rule[")
+        .append(get_ID()).append("]");
       return sb.toString();
     }
 

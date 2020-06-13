@@ -165,7 +165,7 @@ public class DefaultModelFactory implements IModelFactory {
 		//	Search packages
 		for (int i = 0; i < s_packages.length; i++)
 		{
-			StringBuilder name = new StringBuilder(s_packages[i]).append(".M").append(className);
+			StringBuffer name = new StringBuffer(s_packages[i]).append(".M").append(className);
 			Class<?> clazz = getPOclass(name.toString(), tableName);
 			if (clazz != null)
 			{

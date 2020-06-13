@@ -29,7 +29,7 @@ public class X_AD_Process_Access extends PO implements I_AD_Process_Access, I_Pe
 	/**
 	 *
 	 */
-	private static final long serialVersionUID = 20200413L;
+	private static final long serialVersionUID = 20191121L;
 
     /** Standard Constructor */
     public X_AD_Process_Access (Properties ctx, int AD_Process_Access_ID, String trxName)
@@ -66,7 +66,7 @@ public class X_AD_Process_Access extends PO implements I_AD_Process_Access, I_Pe
 
     public String toString()
     {
-      StringBuilder sb = new StringBuilder ("X_AD_Process_Access[")
+      StringBuffer sb = new StringBuffer ("X_AD_Process_Access[")
         .append(get_ID()).append("]");
       return sb.toString();
     }

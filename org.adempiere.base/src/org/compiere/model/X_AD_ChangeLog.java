@@ -30,7 +30,7 @@ public class X_AD_ChangeLog extends PO implements I_AD_ChangeLog, I_Persistent
 	/**
 	 *
 	 */
-	private static final long serialVersionUID = 20200413L;
+	private static final long serialVersionUID = 20191121L;
 
     /** Standard Constructor */
     public X_AD_ChangeLog (Properties ctx, int AD_ChangeLog_ID, String trxName)
@@ -70,7 +70,7 @@ public class X_AD_ChangeLog extends PO implements I_AD_ChangeLog, I_Persistent
 
     public String toString()
     {
-      StringBuilder sb = new StringBuilder ("X_AD_ChangeLog[")
+      StringBuffer sb = new StringBuffer ("X_AD_ChangeLog[")
         .append(get_ID()).append("]");
       return sb.toString();
     }

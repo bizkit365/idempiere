@@ -32,7 +32,7 @@ public class X_RV_BPartner extends PO implements I_RV_BPartner, I_Persistent
 	/**
 	 *
 	 */
-	private static final long serialVersionUID = 20200413L;
+	private static final long serialVersionUID = 20191121L;
 
     /** Standard Constructor */
     public X_RV_BPartner (Properties ctx, int RV_BPartner_ID, String trxName)
@@ -84,8 +84,8 @@ public class X_RV_BPartner extends PO implements I_RV_BPartner, I_Persistent
 
     public String toString()
     {
-      StringBuilder sb = new StringBuilder ("X_RV_BPartner[")
-        .append(get_ID()).append(",Name=").append(getName()).append("]");
+      StringBuffer sb = new StringBuffer ("X_RV_BPartner[")
+        .append(get_ID()).append("]");
       return sb.toString();
     }
 

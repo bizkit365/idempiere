@@ -249,7 +249,7 @@ public class InOutGenerateRMA extends SvrProcess
         	log.log(Level.WARNING, msglog.toString());
         }
         
-        StringBuilder processMsg = new StringBuilder().append(shipment.getDocumentNo());
+        StringBuffer processMsg = new StringBuffer().append(shipment.getDocumentNo());
         
         if (!shipment.processIt(p_docAction))
         {

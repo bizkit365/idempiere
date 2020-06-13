@@ -30,7 +30,7 @@ public class X_WS_WebServiceFieldOutput extends PO implements I_WS_WebServiceFie
 	/**
 	 *
 	 */
-	private static final long serialVersionUID = 20200413L;
+	private static final long serialVersionUID = 20191121L;
 
     /** Standard Constructor */
     public X_WS_WebServiceFieldOutput (Properties ctx, int WS_WebServiceFieldOutput_ID, String trxName)
@@ -66,7 +66,7 @@ public class X_WS_WebServiceFieldOutput extends PO implements I_WS_WebServiceFie
 
     public String toString()
     {
-      StringBuilder sb = new StringBuilder ("X_WS_WebServiceFieldOutput[")
+      StringBuffer sb = new StringBuffer ("X_WS_WebServiceFieldOutput[")
         .append(get_ID()).append("]");
       return sb.toString();
     }

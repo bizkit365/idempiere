@@ -212,7 +212,7 @@ public class WQuickEntry extends Window implements EventListener<Event>, ValueCh
 			if (!gridtab.isLoadComplete())
 				gridwindow.initTab(i);
 			for (GridField gridfield : gridtab.getFields()) {
-				MField field = MField.get(Env.getCtx(), gridfield.getAD_Field_ID());
+				MField field = new MField(Env.getCtx(), gridfield.getAD_Field_ID(), null);
 				if (field.isQuickEntry()) {
 					if (! isValidQuickEntryType(field.getAD_Reference_ID()))
 						continue;

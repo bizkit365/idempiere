@@ -29,7 +29,7 @@ public class X_AD_PostIt extends PO implements I_AD_PostIt, I_Persistent
 	/**
 	 *
 	 */
-	private static final long serialVersionUID = 20200413L;
+	private static final long serialVersionUID = 20191121L;
 
     /** Standard Constructor */
     public X_AD_PostIt (Properties ctx, int AD_PostIt_ID, String trxName)
@@ -64,7 +64,7 @@ public class X_AD_PostIt extends PO implements I_AD_PostIt, I_Persistent
 
     public String toString()
     {
-      StringBuilder sb = new StringBuilder ("X_AD_PostIt[")
+      StringBuffer sb = new StringBuffer ("X_AD_PostIt[")
         .append(get_ID()).append("]");
       return sb.toString();
     }

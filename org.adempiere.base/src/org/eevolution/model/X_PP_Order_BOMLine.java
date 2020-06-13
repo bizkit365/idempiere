@@ -34,7 +34,7 @@ public class X_PP_Order_BOMLine extends PO implements I_PP_Order_BOMLine, I_Pers
 	/**
 	 *
 	 */
-	private static final long serialVersionUID = 20200413L;
+	private static final long serialVersionUID = 20191121L;
 
     /** Standard Constructor */
     public X_PP_Order_BOMLine (Properties ctx, int PP_Order_BOMLine_ID, String trxName)
@@ -87,7 +87,7 @@ public class X_PP_Order_BOMLine extends PO implements I_PP_Order_BOMLine, I_Pers
 
     public String toString()
     {
-      StringBuilder sb = new StringBuilder ("X_PP_Order_BOMLine[")
+      StringBuffer sb = new StringBuffer ("X_PP_Order_BOMLine[")
         .append(get_ID()).append("]");
       return sb.toString();
     }

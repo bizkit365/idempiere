@@ -495,7 +495,6 @@ public class WindowContainer extends AbstractUIPart implements EventListener<Eve
 			return;
 		if (title.length() <= MAX_TITLE_LENGTH) 
 		{
-			tab.setTooltiptext(null);
 			tab.setLabel(title);
 		}
 		else

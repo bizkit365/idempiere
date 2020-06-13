@@ -29,7 +29,7 @@ public class X_ASP_ClientLevel extends PO implements I_ASP_ClientLevel, I_Persis
 	/**
 	 *
 	 */
-	private static final long serialVersionUID = 20200413L;
+	private static final long serialVersionUID = 20191121L;
 
     /** Standard Constructor */
     public X_ASP_ClientLevel (Properties ctx, int ASP_ClientLevel_ID, String trxName)
@@ -66,7 +66,7 @@ public class X_ASP_ClientLevel extends PO implements I_ASP_ClientLevel, I_Persis
 
     public String toString()
     {
-      StringBuilder sb = new StringBuilder ("X_ASP_ClientLevel[")
+      StringBuffer sb = new StringBuffer ("X_ASP_ClientLevel[")
         .append(get_ID()).append("]");
       return sb.toString();
     }

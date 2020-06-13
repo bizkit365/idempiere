@@ -412,7 +412,7 @@ public class RequestEventHandler extends AbstractEventHandler implements Managed
 	 */
 	private String getMailTrailer(MRequest r, String serverAddress)
 	{
-		StringBuilder sb = new StringBuilder("\n").append(MRequest.SEPARATOR)
+		StringBuffer sb = new StringBuffer("\n").append(MRequest.SEPARATOR)
 			.append(Msg.translate(r.getCtx(), "R_Request_ID"))
 			.append(": ").append(r.getDocumentNo())
 			.append("  ").append(r.getMailTag())

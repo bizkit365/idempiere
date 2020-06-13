@@ -30,7 +30,7 @@ public class X_R_IssueRecommendation extends PO implements I_R_IssueRecommendati
 	/**
 	 *
 	 */
-	private static final long serialVersionUID = 20200413L;
+	private static final long serialVersionUID = 20191121L;
 
     /** Standard Constructor */
     public X_R_IssueRecommendation (Properties ctx, int R_IssueRecommendation_ID, String trxName)
@@ -66,8 +66,8 @@ public class X_R_IssueRecommendation extends PO implements I_R_IssueRecommendati
 
     public String toString()
     {
-      StringBuilder sb = new StringBuilder ("X_R_IssueRecommendation[")
-        .append(get_ID()).append(",Name=").append(getName()).append("]");
+      StringBuffer sb = new StringBuffer ("X_R_IssueRecommendation[")
+        .append(get_ID()).append("]");
       return sb.toString();
     }
 

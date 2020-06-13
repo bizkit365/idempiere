@@ -31,7 +31,7 @@ public class X_C_BPartner_Product extends PO implements I_C_BPartner_Product, I_
 	/**
 	 *
 	 */
-	private static final long serialVersionUID = 20200413L;
+	private static final long serialVersionUID = 20191121L;
 
     /** Standard Constructor */
     public X_C_BPartner_Product (Properties ctx, int C_BPartner_Product_ID, String trxName)
@@ -71,7 +71,7 @@ public class X_C_BPartner_Product extends PO implements I_C_BPartner_Product, I_
 
     public String toString()
     {
-      StringBuilder sb = new StringBuilder ("X_C_BPartner_Product[")
+      StringBuffer sb = new StringBuffer ("X_C_BPartner_Product[")
         .append(get_ID()).append("]");
       return sb.toString();
     }

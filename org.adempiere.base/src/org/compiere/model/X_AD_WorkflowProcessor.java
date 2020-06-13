@@ -31,7 +31,7 @@ public class X_AD_WorkflowProcessor extends PO implements I_AD_WorkflowProcessor
 	/**
 	 *
 	 */
-	private static final long serialVersionUID = 20200413L;
+	private static final long serialVersionUID = 20191121L;
 
     /** Standard Constructor */
     public X_AD_WorkflowProcessor (Properties ctx, int AD_WorkflowProcessor_ID, String trxName)
@@ -71,8 +71,8 @@ public class X_AD_WorkflowProcessor extends PO implements I_AD_WorkflowProcessor
 
     public String toString()
     {
-      StringBuilder sb = new StringBuilder ("X_AD_WorkflowProcessor[")
-        .append(get_ID()).append(",Name=").append(getName()).append("]");
+      StringBuffer sb = new StringBuffer ("X_AD_WorkflowProcessor[")
+        .append(get_ID()).append("]");
       return sb.toString();
     }
 

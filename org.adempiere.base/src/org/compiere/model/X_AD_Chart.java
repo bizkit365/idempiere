@@ -29,7 +29,7 @@ public class X_AD_Chart extends PO implements I_AD_Chart, I_Persistent
 	/**
 	 *
 	 */
-	private static final long serialVersionUID = 20200413L;
+	private static final long serialVersionUID = 20191121L;
 
     /** Standard Constructor */
     public X_AD_Chart (Properties ctx, int AD_Chart_ID, String trxName)
@@ -74,8 +74,8 @@ public class X_AD_Chart extends PO implements I_AD_Chart, I_Persistent
 
     public String toString()
     {
-      StringBuilder sb = new StringBuilder ("X_AD_Chart[")
-        .append(get_ID()).append(",Name=").append(getName()).append("]");
+      StringBuffer sb = new StringBuffer ("X_AD_Chart[")
+        .append(get_ID()).append("]");
       return sb.toString();
     }
 

@@ -33,7 +33,7 @@ public class X_GL_JournalLine extends PO implements I_GL_JournalLine, I_Persiste
 	/**
 	 *
 	 */
-	private static final long serialVersionUID = 20200413L;
+	private static final long serialVersionUID = 20191121L;
 
     /** Standard Constructor */
     public X_GL_JournalLine (Properties ctx, int GL_JournalLine_ID, String trxName)
@@ -84,7 +84,7 @@ public class X_GL_JournalLine extends PO implements I_GL_JournalLine, I_Persiste
 
     public String toString()
     {
-      StringBuilder sb = new StringBuilder ("X_GL_JournalLine[")
+      StringBuffer sb = new StringBuffer ("X_GL_JournalLine[")
         .append(get_ID()).append("]");
       return sb.toString();
     }

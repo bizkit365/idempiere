@@ -32,7 +32,7 @@ public class X_PP_Order_BOM extends PO implements I_PP_Order_BOM, I_Persistent
 	/**
 	 *
 	 */
-	private static final long serialVersionUID = 20200413L;
+	private static final long serialVersionUID = 20191121L;
 
     /** Standard Constructor */
     public X_PP_Order_BOM (Properties ctx, int PP_Order_BOM_ID, String trxName)
@@ -73,8 +73,8 @@ public class X_PP_Order_BOM extends PO implements I_PP_Order_BOM, I_Persistent
 
     public String toString()
     {
-      StringBuilder sb = new StringBuilder ("X_PP_Order_BOM[")
-        .append(get_ID()).append(",Name=").append(getName()).append("]");
+      StringBuffer sb = new StringBuffer ("X_PP_Order_BOM[")
+        .append(get_ID()).append("]");
       return sb.toString();
     }
 

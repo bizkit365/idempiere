@@ -30,7 +30,7 @@ public class X_AD_StyleLine extends PO implements I_AD_StyleLine, I_Persistent
 	/**
 	 *
 	 */
-	private static final long serialVersionUID = 20200413L;
+	private static final long serialVersionUID = 20191121L;
 
     /** Standard Constructor */
     public X_AD_StyleLine (Properties ctx, int AD_StyleLine_ID, String trxName)
@@ -72,7 +72,7 @@ public class X_AD_StyleLine extends PO implements I_AD_StyleLine, I_Persistent
 
     public String toString()
     {
-      StringBuilder sb = new StringBuilder ("X_AD_StyleLine[")
+      StringBuffer sb = new StringBuffer ("X_AD_StyleLine[")
         .append(get_ID()).append("]");
       return sb.toString();
     }

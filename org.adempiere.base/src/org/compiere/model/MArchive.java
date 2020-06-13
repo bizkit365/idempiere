@@ -39,7 +39,7 @@ public class MArchive extends X_AD_Archive {
 	/**
 	 * 
 	 */
-	private static final long serialVersionUID = -2384941426301490384L;
+	private static final long serialVersionUID = 3217541537768473865L;
 
 	/**
 	 * Get Archives
@@ -145,7 +145,7 @@ public class MArchive extends X_AD_Archive {
 	 * @param trxName
 	 */
 	private void initArchiveStoreDetails(Properties ctx, String trxName) {
-		MClientInfo clientInfo = MClientInfo.get(ctx, getAD_Client_ID());
+		MClientInfo clientInfo = MClientInfo.get(ctx);
 		provider=new MStorageProvider(ctx, clientInfo.getStorageArchive_ID(), trxName);		
 	}
 
@@ -269,31 +269,13 @@ public class MArchive extends X_AD_Archive {
 		return true;
 	} // beforeSave
 	
-	@Override
-	protected boolean postDelete()
+	protected boolean beforeDelete ()
 	{
 		IArchiveStore prov = provider.getArchiveStore();
 		if (prov != null)
 			return prov.deleteArchive(this,provider);
 		return true;
 		
-	}
-
-	@Override
-	protected void saveNew_afterSetID()
-	{
-		IArchiveStore prov = provider.getArchiveStore();
-		if (prov != null && prov.isPendingFlush())
-			 prov.flush(this,provider);
-	}
-
-	/**
-	 * Set Storage Provider
-	 * Used temporarily for the process to migrate storage provider
-	 * @param Storage provider
-	 */
-	public void setStorageProvider(MStorageProvider p) {
-		provider = p;
 	}
 
 } // MArchive

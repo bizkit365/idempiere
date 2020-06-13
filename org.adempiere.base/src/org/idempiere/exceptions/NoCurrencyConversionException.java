@@ -62,7 +62,7 @@ public class NoCurrencyConversionException extends AdempiereException
 	{
 		DateFormat df = DisplayType.getDateFormat(DisplayType.Date);
 		
-		StringBuilder sb = new StringBuilder("@NoCurrencyConversion@ ")
+		StringBuffer sb = new StringBuffer("@NoCurrencyConversion@ ")
 			.append(MCurrency.getISO_Code(Env.getCtx(), C_Currency_ID))
 			.append("->")
 			.append(MCurrency.getISO_Code(Env.getCtx(), C_Currency_ID_To));

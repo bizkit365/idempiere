@@ -30,7 +30,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import org.adempiere.util.ServerContext;
 import org.apache.ecs.AlignType;
 import org.apache.ecs.xhtml.a;
 import org.apache.ecs.xhtml.body;
@@ -117,7 +116,7 @@ public class WebEnv
 		}
 
 		Enumeration<String> en = config.getInitParameterNames();
-		StringBuilder info = new StringBuilder("Servlet Init Parameter: ")
+		StringBuffer info = new StringBuffer("Servlet Init Parameter: ")
 			.append(config.getServletName());
 		while (en.hasMoreElements())
 		{
@@ -150,7 +149,7 @@ public class WebEnv
 
 		//  Load Environment Variables (serverApps/src/web/WEB-INF/web.xml)
 		Enumeration<String> en = context.getInitParameterNames();
-		StringBuilder info = new StringBuilder("Servlet Context Init Parameters: ")
+		StringBuffer info = new StringBuffer("Servlet Context Init Parameters: ")
 			.append(context.getServletContextName());
 		while (en.hasMoreElements())
 		{
@@ -181,16 +180,11 @@ public class WebEnv
 		if (log.isLoggable(Level.INFO)) log.info(info.toString());
 		//
 		Properties ctx = new Properties();
-		try {
-			ServerContext.setCurrentInstance(ctx);
-			MClient client = MClient.get(Env.getCtx(), 0);
-			MSystem system = MSystem.get(Env.getCtx());
-			client.sendEMail(client.getRequestEMail(),
-				"Server started: " + system.getName() + " (" + WebUtil.getServerName() + ")",
-				"ServerInfo: " + context.getServerInfo(), null);
-		} finally {
-			ServerContext.dispose();
-		}
+		MClient client = MClient.get(ctx, 0);
+		MSystem system = MSystem.get(ctx);
+		client.sendEMail(client.getRequestEMail(),
+			"Server started: " + system.getName() + " (" + WebUtil.getServerName() + ")",
+			"ServerInfo: " + context.getServerInfo(), null);
 
 		return s_initOK;
 	}	//	initWeb

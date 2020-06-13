@@ -31,7 +31,7 @@ public class X_HR_PayrollConcept extends PO implements I_HR_PayrollConcept, I_Pe
 	/**
 	 *
 	 */
-	private static final long serialVersionUID = 20200413L;
+	private static final long serialVersionUID = 20191121L;
 
     /** Standard Constructor */
     public X_HR_PayrollConcept (Properties ctx, int HR_PayrollConcept_ID, String trxName)
@@ -70,8 +70,8 @@ public class X_HR_PayrollConcept extends PO implements I_HR_PayrollConcept, I_Pe
 
     public String toString()
     {
-      StringBuilder sb = new StringBuilder ("X_HR_PayrollConcept[")
-        .append(get_ID()).append(",Name=").append(getName()).append("]");
+      StringBuffer sb = new StringBuffer ("X_HR_PayrollConcept[")
+        .append(get_ID()).append("]");
       return sb.toString();
     }
 

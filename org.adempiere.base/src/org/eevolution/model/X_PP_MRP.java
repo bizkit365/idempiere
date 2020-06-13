@@ -34,7 +34,7 @@ public class X_PP_MRP extends PO implements I_PP_MRP, I_Persistent
 	/**
 	 *
 	 */
-	private static final long serialVersionUID = 20200413L;
+	private static final long serialVersionUID = 20191121L;
 
     /** Standard Constructor */
     public X_PP_MRP (Properties ctx, int PP_MRP_ID, String trxName)
@@ -73,8 +73,8 @@ public class X_PP_MRP extends PO implements I_PP_MRP, I_Persistent
 
     public String toString()
     {
-      StringBuilder sb = new StringBuilder ("X_PP_MRP[")
-        .append(get_ID()).append(",Name=").append(getName()).append("]");
+      StringBuffer sb = new StringBuffer ("X_PP_MRP[")
+        .append(get_ID()).append("]");
       return sb.toString();
     }
 

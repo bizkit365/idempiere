@@ -286,7 +286,7 @@ public class MPInstance extends X_AD_PInstance
 	 */
 	public String toString ()
 	{
-		StringBuilder sb = new StringBuilder ("MPInstance[")
+		StringBuffer sb = new StringBuffer ("MPInstance[")
 			.append (get_ID())
 			.append(",OK=").append(isOK());
 		String msg = getErrorMsg();

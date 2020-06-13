@@ -32,7 +32,7 @@ public class X_T_Transaction extends PO implements I_T_Transaction, I_Persistent
 	/**
 	 *
 	 */
-	private static final long serialVersionUID = 20200413L;
+	private static final long serialVersionUID = 20191121L;
 
     /** Standard Constructor */
     public X_T_Transaction (Properties ctx, int T_Transaction_ID, String trxName)
@@ -74,7 +74,7 @@ public class X_T_Transaction extends PO implements I_T_Transaction, I_Persistent
 
     public String toString()
     {
-      StringBuilder sb = new StringBuilder ("X_T_Transaction[")
+      StringBuffer sb = new StringBuffer ("X_T_Transaction[")
         .append(get_ID()).append("]");
       return sb.toString();
     }

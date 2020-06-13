@@ -605,7 +605,7 @@ public class MOrderLine extends X_C_OrderLine
 	 */
 	public String toString ()
 	{
-		StringBuilder sb = new StringBuilder ("MOrderLine[")
+		StringBuffer sb = new StringBuffer ("MOrderLine[")
 			.append(get_ID())
 			.append(", Line=").append(getLine())
 			.append(", Ordered=").append(getQtyOrdered())

@@ -33,7 +33,7 @@ public class X_C_Order extends PO implements I_C_Order, I_Persistent
 	/**
 	 *
 	 */
-	private static final long serialVersionUID = 20200413L;
+	private static final long serialVersionUID = 20191121L;
 
     /** Standard Constructor */
     public X_C_Order (Properties ctx, int C_Order_ID, String trxName)
@@ -128,7 +128,7 @@ public class X_C_Order extends PO implements I_C_Order, I_Persistent
 
     public String toString()
     {
-      StringBuilder sb = new StringBuilder ("X_C_Order[")
+      StringBuffer sb = new StringBuffer ("X_C_Order[")
         .append(get_ID()).append("]");
       return sb.toString();
     }

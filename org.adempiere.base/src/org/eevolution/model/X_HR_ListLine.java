@@ -33,7 +33,7 @@ public class X_HR_ListLine extends PO implements I_HR_ListLine, I_Persistent
 	/**
 	 *
 	 */
-	private static final long serialVersionUID = 20200413L;
+	private static final long serialVersionUID = 20191121L;
 
     /** Standard Constructor */
     public X_HR_ListLine (Properties ctx, int HR_ListLine_ID, String trxName)
@@ -70,8 +70,8 @@ public class X_HR_ListLine extends PO implements I_HR_ListLine, I_Persistent
 
     public String toString()
     {
-      StringBuilder sb = new StringBuilder ("X_HR_ListLine[")
-        .append(get_ID()).append(",Name=").append(getName()).append("]");
+      StringBuffer sb = new StringBuffer ("X_HR_ListLine[")
+        .append(get_ID()).append("]");
       return sb.toString();
     }
 

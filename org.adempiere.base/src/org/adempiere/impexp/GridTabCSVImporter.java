@@ -241,8 +241,7 @@ public class GridTabCSVImporter implements IGridTabImporter
 						manageMasterTrx(gridTab, null);
 						createTrx(gridTab);
 					}
-					if (trx != null)
-						trx.setDisplayName(GridTabCSVImporter.class.getName()+"_fileImport_" + gridTab.getTableName());
+					trx.setDisplayName(GridTabCSVImporter.class.getName()+"_fileImport_" + gridTab.getTableName());
 
 					String recordResult = processRecord(importMode, gridTab, indxDetail, isDetail, idx, rowResult, childs);
 					rowResult.append(recordResult);

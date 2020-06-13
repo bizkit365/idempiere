@@ -171,9 +171,9 @@ public class TranslationTable
 		if (po.get_ID() == 0)
 			throw new IllegalArgumentException("PO ID is 0");
 		//
-		StringBuilder sql1 = new StringBuilder();
+		StringBuffer sql1 = new StringBuffer();
 		sql1.append("INSERT INTO ").append(m_trlTableName).append(" (");
-		StringBuilder sql2 = new StringBuilder();
+		StringBuffer sql2 = new StringBuffer();
 		sql2.append(") SELECT ");
 		
 		//	Key Columns
@@ -219,7 +219,7 @@ public class TranslationTable
 		//
 		StringBuilder sb = new StringBuilder("UPDATE ");
 		sb.append(m_trlTableName)
-			.append(" SET IsTranslated='N',Updated=getDate() WHERE ")
+			.append(" SET IsTranslated='N',Updated=SysDate WHERE ")
 			.append(m_baseTableName).append("_ID=").append(po.get_ID());
 		int no = DB.executeUpdate(sb.toString(), po.get_TrxName());
 		if (log.isLoggable(Level.FINE)) log.fine(m_trlTableName + ": ID=" + po.get_ID() + " #" + no);

@@ -31,7 +31,7 @@ public class X_T_BOM_Indented extends PO implements I_T_BOM_Indented, I_Persiste
 	/**
 	 *
 	 */
-	private static final long serialVersionUID = 20200413L;
+	private static final long serialVersionUID = 20191121L;
 
     /** Standard Constructor */
     public X_T_BOM_Indented (Properties ctx, int T_BOM_Indented_ID, String trxName)
@@ -66,7 +66,7 @@ public class X_T_BOM_Indented extends PO implements I_T_BOM_Indented, I_Persiste
 
     public String toString()
     {
-      StringBuilder sb = new StringBuilder ("X_T_BOM_Indented[")
+      StringBuffer sb = new StringBuffer ("X_T_BOM_Indented[")
         .append(get_ID()).append("]");
       return sb.toString();
     }

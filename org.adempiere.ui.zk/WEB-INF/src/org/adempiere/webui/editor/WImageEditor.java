@@ -25,12 +25,9 @@ import org.compiere.model.MImage;
 import org.compiere.util.CLogger;
 import org.compiere.util.Env;
 import org.zkoss.image.AImage;
-import org.zkoss.zk.ui.Component;
-import org.zkoss.zk.ui.Page;
 import org.zkoss.zk.ui.event.Event;
 import org.zkoss.zk.ui.event.EventListener;
 import org.zkoss.zk.ui.event.Events;
-import org.zkoss.zul.Cell;
 import org.zkoss.zul.Image;
 
 /**
@@ -56,21 +53,7 @@ public class WImageEditor extends WEditor
     
     public WImageEditor(GridField gridField)
     {
-        super(new Image() {
-			private static final long serialVersionUID = 8492629361709791256L;
-
-			@Override
-			public void onPageAttached(Page newpage, Page oldpage) {
-				super.onPageAttached(newpage, oldpage);
-				if (newpage != null && getParent() != null) {
-					Component p = getParent();
-					if (p instanceof Cell) {
-						Cell cell = (Cell) p;
-						LayoutUtils.addSclass("image-field-cell", cell);
-					}
-				}
-			}        	
-        }, gridField);
+        super(new Image(), gridField);
         init();
     }
 
@@ -83,7 +66,7 @@ public class WImageEditor extends WEditor
     {
     	AImage img = null;
         getComponent().setContent(img);
-        getComponent().setSclass("image-field image-fit-contain");        
+        getComponent().setSclass("image-field");        
     }
 
      @Override
@@ -195,10 +178,6 @@ public class WImageEditor extends WEditor
 						//
 						ValueChangeEvent vce = new ValueChangeEvent(WImageEditor.this, gridField.getColumnName(), oldValue, newValue);
 						fireValueChange(vce);
-						if (oldValue == null && newValue != null && getGridField() != null && getGridField().getGridTab() != null) {
-							// save automatically when creating a new image
-							getGridField().getGridTab().dataSave(false);
-						}
 					}
 					
 				}

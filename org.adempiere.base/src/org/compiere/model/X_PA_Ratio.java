@@ -30,7 +30,7 @@ public class X_PA_Ratio extends PO implements I_PA_Ratio, I_Persistent
 	/**
 	 *
 	 */
-	private static final long serialVersionUID = 20200413L;
+	private static final long serialVersionUID = 20191121L;
 
     /** Standard Constructor */
     public X_PA_Ratio (Properties ctx, int PA_Ratio_ID, String trxName)
@@ -67,8 +67,8 @@ public class X_PA_Ratio extends PO implements I_PA_Ratio, I_Persistent
 
     public String toString()
     {
-      StringBuilder sb = new StringBuilder ("X_PA_Ratio[")
-        .append(get_ID()).append(",Name=").append(getName()).append("]");
+      StringBuffer sb = new StringBuffer ("X_PA_Ratio[")
+        .append(get_ID()).append("]");
       return sb.toString();
     }
 

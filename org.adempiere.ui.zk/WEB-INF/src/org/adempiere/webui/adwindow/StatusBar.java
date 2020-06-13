@@ -18,7 +18,6 @@
 package org.adempiere.webui.adwindow;
 
 import org.adempiere.webui.LayoutUtils;
-import org.adempiere.webui.apps.form.WQuickForm;
 import org.adempiere.webui.component.DocumentLink;
 import org.adempiere.webui.component.Label;
 import org.adempiere.webui.component.Panel;
@@ -34,7 +33,7 @@ import org.zkoss.zk.ui.Executions;
 import org.zkoss.zk.ui.event.Event;
 import org.zkoss.zk.ui.event.EventListener;
 import org.zkoss.zk.ui.event.Events;
-import org.zkoss.zk.ui.util.Notification;
+import org.zkoss.zk.ui.util.Clients;
 import org.zkoss.zul.Caption;
 import org.zkoss.zul.Div;
 import org.zkoss.zul.Hlayout;
@@ -51,11 +50,11 @@ import org.zkoss.zul.Space;
  */
 public class StatusBar extends Panel implements EventListener<Event> 
 {
-	/**
+    /**
 	 * 
 	 */
-	private static final long serialVersionUID = 7091641684809092888L;
-
+	private static final long serialVersionUID = 1519490416637936553L;
+	
 	private Panel infoPanel;
 
 	private Html infoLine;
@@ -170,7 +169,7 @@ public class StatusBar extends Panel implements EventListener<Event>
 		
     	String labelText = buildLabelText(m_statusText);
     	if (error) {
-    		Notification.show(buildNotificationText(m_statusText), "error", findTabpanel(this), "top_left", 3500, true);
+    		Clients.showNotification(buildNotificationText(m_statusText), "error", findTabpanel(this), "top_left", 3500, true);
     	}
     	Label label = new Label(labelText);
     	messageContainer.setSclass(error ? "docstatus-error" : "docstatus-normal");
@@ -244,9 +243,7 @@ public class StatusBar extends Panel implements EventListener<Event>
 		while (parent != null) {
 			if (parent instanceof Tabpanel)
 				return parent;
-			else if (parent instanceof WQuickForm)
-				return parent;
-
+			
 			parent = parent.getParent();
 		}
 		return null;
@@ -287,7 +284,6 @@ public class StatusBar extends Panel implements EventListener<Event>
     private void createPopup() {
 		msgPopupCnt = new Div();
 		ZKUpdateUtil.setVflex(msgPopupCnt, "1");
-		msgPopupCnt.setStyle("flex-basis: auto");
 
 		
 		msgPopup = new Window();

@@ -32,7 +32,7 @@ public class X_PA_ReportColumn extends PO implements I_PA_ReportColumn, I_Persis
 	/**
 	 *
 	 */
-	private static final long serialVersionUID = 20200413L;
+	private static final long serialVersionUID = 20191122L;
 
     /** Standard Constructor */
     public X_PA_ReportColumn (Properties ctx, int PA_ReportColumn_ID, String trxName)
@@ -101,8 +101,8 @@ public class X_PA_ReportColumn extends PO implements I_PA_ReportColumn, I_Persis
 
     public String toString()
     {
-      StringBuilder sb = new StringBuilder ("X_PA_ReportColumn[")
-        .append(get_ID()).append(",Name=").append(getName()).append("]");
+      StringBuffer sb = new StringBuffer ("X_PA_ReportColumn[")
+        .append(get_ID()).append("]");
       return sb.toString();
     }
 

@@ -93,7 +93,7 @@ public class MPInstancePara extends X_AD_PInstance_Para
 	 */
 	public String toString ()
 	{
-		StringBuilder sb = new StringBuilder ("MPInstancePara[")
+		StringBuffer sb = new StringBuffer ("MPInstancePara[")
 			.append (get_ID ()).append("-").append(getParameterName());
 		if (getP_String() != null)
 		{

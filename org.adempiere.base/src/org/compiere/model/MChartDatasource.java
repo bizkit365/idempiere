@@ -88,7 +88,7 @@ public class MChartDatasource extends X_AD_ChartDatasource {
 		sql += " GROUP BY " + series + ", " + category + "," + getKeyColumn()
 		+ " ORDER BY " + series + ", " + category + "," + getKeyColumn();
 		
-		StringBuilder includedIds = new StringBuilder();
+		StringBuffer includedIds = new StringBuffer();
 		//	Execute
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;

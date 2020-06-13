@@ -126,7 +126,7 @@ public class MReportColumnSet extends X_PA_ReportColumnSet
 	 */
 	public String toString ()
 	{
-		StringBuilder sb = new StringBuilder ("MReportColumnSet[")
+		StringBuffer sb = new StringBuffer ("MReportColumnSet[")
 			.append(get_ID()).append(" - ").append(getName())
 			.append ("]");
 		return sb.toString ();

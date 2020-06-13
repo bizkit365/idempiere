@@ -32,7 +32,7 @@ public class X_I_InOutLineConfirm extends PO implements I_I_InOutLineConfirm, I_
 	/**
 	 *
 	 */
-	private static final long serialVersionUID = 20200413L;
+	private static final long serialVersionUID = 20191121L;
 
     /** Standard Constructor */
     public X_I_InOutLineConfirm (Properties ctx, int I_InOutLineConfirm_ID, String trxName)
@@ -73,7 +73,7 @@ public class X_I_InOutLineConfirm extends PO implements I_I_InOutLineConfirm, I_
 
     public String toString()
     {
-      StringBuilder sb = new StringBuilder ("X_I_InOutLineConfirm[")
+      StringBuffer sb = new StringBuffer ("X_I_InOutLineConfirm[")
         .append(get_ID()).append("]");
       return sb.toString();
     }

@@ -33,7 +33,7 @@ public class X_A_Asset_Acct extends PO implements I_A_Asset_Acct, I_Persistent
 	/**
 	 *
 	 */
-	private static final long serialVersionUID = 20200413L;
+	private static final long serialVersionUID = 20191121L;
 
     /** Standard Constructor */
     public X_A_Asset_Acct (Properties ctx, int A_Asset_Acct_ID, String trxName)
@@ -83,7 +83,7 @@ public class X_A_Asset_Acct extends PO implements I_A_Asset_Acct, I_Persistent
 
     public String toString()
     {
-      StringBuilder sb = new StringBuilder ("X_A_Asset_Acct[")
+      StringBuffer sb = new StringBuffer ("X_A_Asset_Acct[")
         .append(get_ID()).append("]");
       return sb.toString();
     }

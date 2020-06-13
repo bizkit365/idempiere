@@ -33,7 +33,7 @@ public class X_C_DepositBatch extends PO implements I_C_DepositBatch, I_Persiste
 	/**
 	 *
 	 */
-	private static final long serialVersionUID = 20200413L;
+	private static final long serialVersionUID = 20191121L;
 
     /** Standard Constructor */
     public X_C_DepositBatch (Properties ctx, int C_DepositBatch_ID, String trxName)
@@ -79,7 +79,7 @@ public class X_C_DepositBatch extends PO implements I_C_DepositBatch, I_Persiste
 
     public String toString()
     {
-      StringBuilder sb = new StringBuilder ("X_C_DepositBatch[")
+      StringBuffer sb = new StringBuffer ("X_C_DepositBatch[")
         .append(get_ID()).append("]");
       return sb.toString();
     }

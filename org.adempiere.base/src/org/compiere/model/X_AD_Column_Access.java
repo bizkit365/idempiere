@@ -30,7 +30,7 @@ public class X_AD_Column_Access extends PO implements I_AD_Column_Access, I_Pers
 	/**
 	 *
 	 */
-	private static final long serialVersionUID = 20200413L;
+	private static final long serialVersionUID = 20191121L;
 
     /** Standard Constructor */
     public X_AD_Column_Access (Properties ctx, int AD_Column_Access_ID, String trxName)
@@ -69,7 +69,7 @@ public class X_AD_Column_Access extends PO implements I_AD_Column_Access, I_Pers
 
     public String toString()
     {
-      StringBuilder sb = new StringBuilder ("X_AD_Column_Access[")
+      StringBuffer sb = new StringBuffer ("X_AD_Column_Access[")
         .append(get_ID()).append("]");
       return sb.toString();
     }

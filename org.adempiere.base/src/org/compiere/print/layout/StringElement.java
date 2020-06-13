@@ -139,7 +139,7 @@ public class StringElement extends PrintElement
 		int startIndex = 0;
 		int endOffset = 0;
 
-		StringBuilder text = new StringBuilder();
+		StringBuffer text = new StringBuffer();
 		if (label != null && label.length() > 0)
 		{
 			text.append(label).append(" ");

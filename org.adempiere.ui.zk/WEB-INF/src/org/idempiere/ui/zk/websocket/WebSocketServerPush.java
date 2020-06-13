@@ -32,7 +32,6 @@ import java.util.concurrent.atomic.AtomicReference;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.zkoss.zk.au.out.AuEcho;
 import org.zkoss.zk.au.out.AuScript;
 import org.zkoss.zk.ui.Desktop;
 import org.zkoss.zk.ui.DesktopUnavailableException;
@@ -122,7 +121,7 @@ public class WebSocketServerPush implements ServerPush {
         	if (endPoint == null) {
         		if (dt.isServerPushEnabled()) {
         			try {
-						Thread.sleep(300);
+						Thread.sleep(2000);
 					} catch (InterruptedException e) {
 					}
         			endPoint = getEndPoint(dt.getId());
@@ -177,7 +176,6 @@ public class WebSocketServerPush implements ServerPush {
     	}
     	if (pendings != null && pendings.length > 0) {
     		for(Schedule<Event> p : pendings) {
-    			//schedule and execute in desktop's onPiggyBack listener
     			p.scheduler.schedule(p.task, p.event);
     		}
     	}
@@ -200,18 +198,14 @@ public class WebSocketServerPush implements ServerPush {
 	public <T extends Event> void schedule(EventListener<T> task, T event,
 			Scheduler<T> scheduler) {
     	if (Executions.getCurrent() == null) {
-    		//schedule and execute in desktop's onPiggyBack listener
-    		scheduler.schedule(task, event);
-	        echo();
-    	} else {
-    		// in event listener thread, use echo to execute async
-    		synchronized (schedules) {
+    		//save for schedule at on piggyback event
+	        synchronized (schedules) {
 				schedules.add(new Schedule(task, event, scheduler));
 			}
-    		if (Executions.getCurrent().getAttribute("AtmosphereServerPush.Echo") == null) {
-    			Executions.getCurrent().setAttribute("AtmosphereServerPush.Echo", Boolean.TRUE);
-    			Clients.response(new AuEcho());
-    		}
+	        echo();
+    	} else {
+    		//in event listener thread, can schedule immediately
+    		scheduler.schedule(task, event);
     	}
     }
 

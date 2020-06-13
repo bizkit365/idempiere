@@ -21,7 +21,6 @@ import java.util.List;
 import java.util.Properties;
 
 import org.adempiere.exceptions.AdempiereException;
-import org.compiere.util.DB;
 
 
 public class MViewComponent extends X_AD_ViewComponent {
@@ -144,9 +143,9 @@ public class MViewComponent extends X_AD_ViewComponent {
 					colSQL = "NULL";
 			}
 			
-			sb.append(DB.getDatabase().quoteColumnName(colSQL));
+			sb.append(colSQL);
 			if (!colName.equals("*"))
-				sb.append(" AS ").append(DB.getDatabase().quoteColumnName(colName));
+				sb.append(" AS ").append(colName);
 		}
 		
 		sb.append(" ").append(getFromClause());
@@ -167,7 +166,7 @@ public class MViewComponent extends X_AD_ViewComponent {
     @Override
 	public String toString()
     {
-    	StringBuilder sb = new StringBuilder("MViewComponent[")
+	    StringBuffer sb = new StringBuffer("MViewComponent[")
 	    	.append(get_ID())
 	        .append("-").append(getName());
 	    sb.append("]");

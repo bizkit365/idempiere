@@ -16,6 +16,7 @@ package org.adempiere.webui.dashboard;
 
 import java.lang.ref.WeakReference;
 import java.util.List;
+import java.util.Properties;
 
 import org.adempiere.base.Service;
 import org.adempiere.base.event.EventManager;
@@ -64,6 +65,8 @@ public class DPRunningJobs extends DashboardPanel implements EventListener<Event
 
 	private int AD_User_ID;
 	
+	private Properties ctx;
+
 	private WeakReference<Desktop> desktop;
 
 	private DesktopCleanup listener;
@@ -72,7 +75,9 @@ public class DPRunningJobs extends DashboardPanel implements EventListener<Event
 	{
 		super();
 
-		AD_User_ID = Env.getAD_User_ID(Env.getCtx());
+		ctx = new Properties();
+		ctx.putAll(Env.getCtx());
+		AD_User_ID = Env.getAD_User_ID(ctx);
 		
 		Panel panel = new Panel();
 		this.appendChild(panel);
@@ -94,7 +99,7 @@ public class DPRunningJobs extends DashboardPanel implements EventListener<Event
 			btn.setIconSclass("z-icon-Refresh");
 			btn.setSclass("trash-toolbarbutton");
 			jobsToolbar.appendChild(btn);
-			btn.setTooltiptext(Util.cleanAmp(Msg.getMsg(Env.getCtx(), "Refresh")));
+			btn.setTooltiptext(Util.cleanAmp(Msg.getMsg(ctx, "Refresh")));
 			btn.addEventListener(Events.ON_CLICK, this);
 		}
 		else
@@ -102,7 +107,7 @@ public class DPRunningJobs extends DashboardPanel implements EventListener<Event
 			Image imgr = new Image(ThemeManager.getThemeResource("images/Refresh24.png"));
 			jobsToolbar.appendChild(imgr);
 			imgr.setStyle("text-align: right; cursor: pointer; width:24px; height:24px;");
-			imgr.setTooltiptext(Util.cleanAmp(Msg.getMsg(Env.getCtx(), "Refresh")));
+			imgr.setTooltiptext(Util.cleanAmp(Msg.getMsg(ctx, "Refresh")));
 			imgr.addEventListener(Events.ON_CLICK, this);
 		}
 		
@@ -186,7 +191,7 @@ public class DPRunningJobs extends DashboardPanel implements EventListener<Event
 			bxJobs.removeChild(comp);
 		}
 		
-		List<MPInstance> pis = getRunningJobForUser(AD_User_ID);
+		List<MPInstance> pis = getRunningJobForUser(ctx, AD_User_ID);
 		for (MPInstance pi : pis) {			
 			MProcess process = new MProcess(pi.getCtx(), pi.getAD_Process_ID(), pi.get_TrxName());
 			String label = process.getName() + " [" + Msg.getElement(pi.getCtx(), "Created") + " = " + pi.getCreated() + "]";
@@ -201,9 +206,9 @@ public class DPRunningJobs extends DashboardPanel implements EventListener<Event
 		}
 	}
 	
-	public static List<MPInstance> getRunningJobForUser(int AD_User_ID) 
+	public static List<MPInstance> getRunningJobForUser(Properties ctx, int AD_User_ID) 
 	{
-		List<MPInstance> pis = new Query(Env.getCtx(), MPInstance.Table_Name, "Coalesce(AD_User_ID,0)=? AND IsProcessing='Y' AND IsRunAsJob='Y'", null)
+		List<MPInstance> pis = new Query(ctx, MPInstance.Table_Name, "Coalesce(AD_User_ID,0)=? AND IsProcessing='Y' AND IsRunAsJob='Y'", null)
 			.setOnlyActiveRecords(true)
 			.setClient_ID()
 			.setParameters(AD_User_ID)

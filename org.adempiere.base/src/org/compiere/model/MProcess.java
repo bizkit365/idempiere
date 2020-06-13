@@ -157,7 +157,6 @@ public class MProcess extends X_AD_Process
 		final String whereClause = MProcessPara.COLUMNNAME_AD_Process_ID+"=?";
 		List<MProcessPara> list = new Query(getCtx(), I_AD_Process_Para.Table_Name, whereClause, get_TrxName())
 			.setParameters(get_ID())
-			.setOnlyActiveRecords(true)
 			.setOrderBy(MProcessPara.COLUMNNAME_SeqNo)
 			.list();
 		//
@@ -190,7 +189,7 @@ public class MProcess extends X_AD_Process
 	 */
 	public String toString ()
 	{
-		StringBuilder sb = new StringBuilder ("MProcess[")
+		StringBuffer sb = new StringBuffer ("MProcess[")
 			.append (get_ID())
 			.append("-").append(getName())
 			.append ("]");

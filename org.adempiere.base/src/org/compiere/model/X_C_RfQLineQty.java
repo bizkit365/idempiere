@@ -32,7 +32,7 @@ public class X_C_RfQLineQty extends PO implements I_C_RfQLineQty, I_Persistent
 	/**
 	 *
 	 */
-	private static final long serialVersionUID = 20200413L;
+	private static final long serialVersionUID = 20191121L;
 
     /** Standard Constructor */
     public X_C_RfQLineQty (Properties ctx, int C_RfQLineQty_ID, String trxName)
@@ -76,7 +76,7 @@ public class X_C_RfQLineQty extends PO implements I_C_RfQLineQty, I_Persistent
 
     public String toString()
     {
-      StringBuilder sb = new StringBuilder ("X_C_RfQLineQty[")
+      StringBuffer sb = new StringBuffer ("X_C_RfQLineQty[")
         .append(get_ID()).append("]");
       return sb.toString();
     }

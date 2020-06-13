@@ -249,11 +249,11 @@ public class MReportTree
 		MTreeNode node = m_tree.getRoot().findNode(ID);
 		if (log.isLoggable(Level.FINEST)) log.finest("Root=" + node);
 		//
-		StringBuilder result = null;
+		StringBuffer result = null;
 		if (node != null && node.isSummary ())
 		{
 			Enumeration<TreeNode> en = node.preorderEnumeration ();
-			StringBuilder sb = new StringBuilder ();
+			StringBuffer sb = new StringBuffer ();
 			while (en.hasMoreElements ())
 			{
 				MTreeNode nn = (MTreeNode)en.nextElement ();
@@ -271,12 +271,12 @@ public class MReportTree
 				else
 					if (log.isLoggable(Level.FINEST)) log.finest ("- skipped parent (" + nn + ")");
 			}
-			result = new StringBuilder (" ( ");
+			result = new StringBuffer (" ( ");
 			result.append (sb);
 			result.append (" ) ");
 		}
 		else	//	not found or not summary 
-			result = new StringBuilder (ColumnName).append("=").append(ID);
+			result = new StringBuffer (ColumnName).append("=").append(ID);
 		//
 		if (log.isLoggable(Level.FINEST)) log.finest(result.toString());
 		return result.toString();

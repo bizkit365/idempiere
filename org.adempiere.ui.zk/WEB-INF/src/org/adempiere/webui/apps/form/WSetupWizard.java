@@ -458,6 +458,7 @@ public class WSetupWizard extends SetupWizard implements IFormController, EventL
 		
 		divNote.appendChild(notesField);
 		notesField.setRows(4);
+		ZKUpdateUtil.setHeight(notesField, "100%");
 		ZKUpdateUtil.setWidth(notesField, "99%");
 
 		MLookup lookup = MLookupFactory.get(Env.getCtx(), form.getWindowNo(),

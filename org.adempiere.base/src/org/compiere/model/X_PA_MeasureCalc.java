@@ -30,7 +30,7 @@ public class X_PA_MeasureCalc extends PO implements I_PA_MeasureCalc, I_Persiste
 	/**
 	 *
 	 */
-	private static final long serialVersionUID = 20200413L;
+	private static final long serialVersionUID = 20191121L;
 
     /** Standard Constructor */
     public X_PA_MeasureCalc (Properties ctx, int PA_MeasureCalc_ID, String trxName)
@@ -78,8 +78,8 @@ public class X_PA_MeasureCalc extends PO implements I_PA_MeasureCalc, I_Persiste
 
     public String toString()
     {
-      StringBuilder sb = new StringBuilder ("X_PA_MeasureCalc[")
-        .append(get_ID()).append(",Name=").append(getName()).append("]");
+      StringBuffer sb = new StringBuffer ("X_PA_MeasureCalc[")
+        .append(get_ID()).append("]");
       return sb.toString();
     }
 

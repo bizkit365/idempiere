@@ -39,7 +39,7 @@ public class MPasswordHistory extends X_AD_Password_History {
 			return new ArrayList<MPasswordHistory>();
 		}
 		StringBuilder whereClause = new StringBuilder()
-				.append("getDate()-")
+				.append("SYSDATE-")
 				.append(daysReuse)
 				.append("<=DatePasswordChanged AND AD_User_ID=")
 				.append(userId);

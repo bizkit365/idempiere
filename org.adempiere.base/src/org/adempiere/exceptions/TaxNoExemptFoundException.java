@@ -37,7 +37,7 @@ public class TaxNoExemptFoundException extends AdempiereException
 	
 	private static final String buildMessage (int AD_Org_ID)
 	{
-		StringBuilder msg = new StringBuilder("@").append(AD_Message).append("@");
+		StringBuffer msg = new StringBuffer("@").append(AD_Message).append("@");
 		msg.append("@AD_Org_ID@:").append(getOrgString(AD_Org_ID));
 		//
 		return msg.toString();

@@ -30,7 +30,7 @@ public class X_AD_Process_Para extends PO implements I_AD_Process_Para, I_Persis
 	/**
 	 *
 	 */
-	private static final long serialVersionUID = 20200523L;
+	private static final long serialVersionUID = 20191121L;
 
     /** Standard Constructor */
     public X_AD_Process_Para (Properties ctx, int AD_Process_Para_ID, String trxName)
@@ -45,8 +45,6 @@ public class X_AD_Process_Para extends PO implements I_AD_Process_Para, I_Persis
 			setEntityType (null);
 // @SQL=select get_sysconfig('DEFAULT_ENTITYTYPE','U',0,0) from dual
 			setFieldLength (0);
-			setIsAutocomplete (false);
-// N
 			setIsCentrallyMaintained (true);
 // Y
 			setIsEncrypted (false);
@@ -82,8 +80,8 @@ public class X_AD_Process_Para extends PO implements I_AD_Process_Para, I_Persis
 
     public String toString()
     {
-      StringBuilder sb = new StringBuilder ("X_AD_Process_Para[")
-        .append(get_ID()).append(",Name=").append(getName()).append("]");
+      StringBuffer sb = new StringBuffer ("X_AD_Process_Para[")
+        .append(get_ID()).append("]");
       return sb.toString();
     }
 
@@ -401,30 +399,6 @@ public class X_AD_Process_Para extends PO implements I_AD_Process_Para, I_Persis
 	public String getHelp () 
 	{
 		return (String)get_Value(COLUMNNAME_Help);
-	}
-
-	/** Set Autocomplete.
-		@param IsAutocomplete 
-		Automatic completion for textfields
-	  */
-	public void setIsAutocomplete (boolean IsAutocomplete)
-	{
-		set_Value (COLUMNNAME_IsAutocomplete, Boolean.valueOf(IsAutocomplete));
-	}
-
-	/** Get Autocomplete.
-		@return Automatic completion for textfields
-	  */
-	public boolean isAutocomplete () 
-	{
-		Object oo = get_Value(COLUMNNAME_IsAutocomplete);
-		if (oo != null) 
-		{
-			 if (oo instanceof Boolean) 
-				 return ((Boolean)oo).booleanValue(); 
-			return "Y".equals(oo);
-		}
-		return false;
 	}
 
 	/** Set Centrally maintained.

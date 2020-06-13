@@ -29,7 +29,7 @@ public class X_AD_LdapProcessorLog extends PO implements I_AD_LdapProcessorLog, 
 	/**
 	 *
 	 */
-	private static final long serialVersionUID = 20200413L;
+	private static final long serialVersionUID = 20191121L;
 
     /** Standard Constructor */
     public X_AD_LdapProcessorLog (Properties ctx, int AD_LdapProcessorLog_ID, String trxName)
@@ -66,7 +66,7 @@ public class X_AD_LdapProcessorLog extends PO implements I_AD_LdapProcessorLog, 
 
     public String toString()
     {
-      StringBuilder sb = new StringBuilder ("X_AD_LdapProcessorLog[")
+      StringBuffer sb = new StringBuffer ("X_AD_LdapProcessorLog[")
         .append(get_ID()).append("]");
       return sb.toString();
     }

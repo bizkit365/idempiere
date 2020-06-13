@@ -63,16 +63,4 @@ public class MStorageProvider extends X_AD_StorageProvider {
 		return store;
 	}
 		
-	public IImageStore getImageStore() {
-		ServiceQuery query=new ServiceQuery();
-		String method = this.getMethod();
-		if (method == null)
-			method = "DB";
-		query.put("method", method);
-		IImageStore store = Service.locator().locate(IImageStore.class, query).getService();
-		if (store == null) {
-			throw new AdempiereException("No image storage provider found");
-		}
-		return store;
-	}
 }

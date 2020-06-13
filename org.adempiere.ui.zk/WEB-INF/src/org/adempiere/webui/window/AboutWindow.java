@@ -65,7 +65,6 @@ import org.compiere.util.Util;
 import org.osgi.framework.Bundle;
 import org.osgi.framework.BundleContext;
 import org.osgi.framework.BundleException;
-import org.osgi.framework.wiring.BundleRevision;
 import org.zkoss.util.media.AMedia;
 import org.zkoss.zhtml.Pre;
 import org.zkoss.zhtml.Text;
@@ -446,37 +445,16 @@ public class AboutWindow extends Window implements EventListener<Event> {
 		if (bundle == null)
 			return;
 		int state = bundle.getState();
-		boolean isFragment = false;
-		BundleRevision rev = bundle.adapt(BundleRevision.class);
-		if (rev != null) {
-			isFragment = (rev.getTypes() & BundleRevision.TYPE_FRAGMENT) != 0;
-		}
-		/*
-		boolean hasFragments = false;
-		if (!isFragment) {
-			if (rev.getWiring() != null) {
-				if (rev.getWiring().getProvidedWires(BundleRevision.HOST_NAMESPACE).size() > 0) {
-					hasFragments = true;
-				}
-			}
-		}
-		*/
 		if (bundle.getBundleId() == 0) {
 			// bundle 0 cannot be stopped
 		} else if (state == Bundle.ACTIVE) {
 			pluginActions.getItemAtIndex(PLUGIN_ACTION_STOP).setVisible(true);
 		} else if (state == Bundle.RESOLVED) {
-			if (!isFragment) {
-				pluginActions.getItemAtIndex(PLUGIN_ACTION_START).setVisible(true);
-			}
+			pluginActions.getItemAtIndex(PLUGIN_ACTION_START).setVisible(true);
 		} else if (state == Bundle.INSTALLED) {
-			if (!isFragment) {
-				pluginActions.getItemAtIndex(PLUGIN_ACTION_START).setVisible(true);
-			}
+			// no options yet for installed
 		} else if (state == Bundle.STARTING) {
-			if (!isFragment) {
-				pluginActions.getItemAtIndex(PLUGIN_ACTION_START).setVisible(true);
-			}
+			// no options yet for starting
 		} else if (state == Bundle.STOPPING) {
 			// no options yet for stopping
 		} else if (state == Bundle.UNINSTALLED) {
@@ -488,7 +466,8 @@ public class AboutWindow extends Window implements EventListener<Event> {
 		Bundle retValue = null;
 		int idx = pluginsTable.getSelectedIndex();
 		if (idx >= 0) {
-			Vector<Object> pluginVector = pluginData.get(idx);
+			Integer selectedPlugin = (Integer) pluginsTable.getModel().getDataAt(idx, 1);
+			Vector<Object> pluginVector = pluginData.get(selectedPlugin);
 			int pluginId = ((IDColumn)pluginVector.get(0)).getRecord_ID();
 			BundleContext bundleCtx = WebUIActivator.getBundleContext();
 			retValue = bundleCtx.getBundle(pluginId);
@@ -526,7 +505,6 @@ public class AboutWindow extends Window implements EventListener<Event> {
 	}
 
 	private void refreshPluginTable() {
-		int idx = pluginsTable.getSelectedIndex();
 		pluginsTable.getModel().removeAll(pluginData);
 		pluginData.removeAllElements();
 
@@ -543,7 +521,6 @@ public class AboutWindow extends Window implements EventListener<Event> {
 		}
 		ListModelTable model = new ListModelTable(pluginData);
 		pluginsTable.setData(model, pluginColumnNames);
-		pluginsTable.setSelectedIndex(idx);
 	}
 
 	protected Tabpanel createInfo() {

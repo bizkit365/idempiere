@@ -32,7 +32,7 @@ public class X_HR_ListVersion extends PO implements I_HR_ListVersion, I_Persiste
 	/**
 	 *
 	 */
-	private static final long serialVersionUID = 20200413L;
+	private static final long serialVersionUID = 20191121L;
 
     /** Standard Constructor */
     public X_HR_ListVersion (Properties ctx, int HR_ListVersion_ID, String trxName)
@@ -71,8 +71,8 @@ public class X_HR_ListVersion extends PO implements I_HR_ListVersion, I_Persiste
 
     public String toString()
     {
-      StringBuilder sb = new StringBuilder ("X_HR_ListVersion[")
-        .append(get_ID()).append(",Name=").append(getName()).append("]");
+      StringBuffer sb = new StringBuffer ("X_HR_ListVersion[")
+        .append(get_ID()).append("]");
       return sb.toString();
     }
 

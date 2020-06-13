@@ -122,14 +122,14 @@
 	width: 180px;
 }
 .global-search-box.z-bandbox > input.z-bandbox-input {
-	width: 180px;
+	width: 156px;
 }
 @media screen and (min-width: 500px) {
 	.global-search-box.z-bandbox {
 		width: 200px;
 	}
 	.global-search-box.z-bandbox > input.z-bandbox-input {
-		width: 200px;
+		width: 176px;
 	}
 }
 @media screen and (min-width: 768px) {
@@ -137,7 +137,7 @@
 		width: 250px;
 	}
 	.global-search-box.z-bandbox > input.z-bandbox-input {
-		width: 250px;
+		width: 226px;
 	}
 }
 @media screen and (min-width: 1024px) {
@@ -145,7 +145,7 @@
 		width: 300px;
 	}
 	.global-search-box.z-bandbox > input.z-bandbox-input {
-		width: 300px;
+		width: 276px;
 	}
 }
 

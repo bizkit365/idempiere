@@ -85,7 +85,7 @@ public class MPaymentProcessor extends X_C_PaymentProcessor
 	 */
 	public String toString ()
 	{
-		StringBuilder sb = new StringBuilder ("MPaymentProcessor[")
+		StringBuffer sb = new StringBuffer ("MPaymentProcessor[")
 			.append(get_ID ()).append("-").append(getName())
 			.append ("]");
 		return sb.toString ();

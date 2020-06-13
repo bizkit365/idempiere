@@ -180,6 +180,7 @@ public class CompareFieldSuggestion extends ADForm {
 		descriptionTextbox.addEventListener(Events.ON_CHANGING, this);
 		descriptionTextbox.setMaxlength(255);
 		descriptionTextbox.setMultiline(true);
+		descriptionTextbox.setHeight("100%");
 		descriptionTextbox.setHflex("1");
 		
 		html = diff(original, changed);
@@ -200,6 +201,7 @@ public class CompareFieldSuggestion extends ADForm {
 		helpTextbox.addEventListener(Events.ON_CHANGING, this);
 		helpTextbox.setMaxlength(2000);
 		helpTextbox.setMultiline(true);
+		helpTextbox.setHeight("100%");
 		helpTextbox.setHflex("1");
 		
 		html = diff(original, changed);

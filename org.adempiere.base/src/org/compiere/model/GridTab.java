@@ -112,7 +112,7 @@ public class GridTab implements DataStatusListener, Evaluatee, Serializable
 	/**
 	 * 
 	 */
-	private static final long serialVersionUID = -8153324039370820860L;
+	private static final long serialVersionUID = 5057703093968124177L;
 
 	public static final String DEFAULT_STATUS_MESSAGE = "NavigateOrUpdate";
 
@@ -214,7 +214,6 @@ public class GridTab implements DataStatusListener, Evaluatee, Serializable
 
 	//Contains currently selected rows
 	private ArrayList<Integer> selection = null;
-	public boolean isQuickForm = false;
 	
 	// Context property names:
 	public static final String CTX_KeyColumnName = "_TabInfo_KeyColumnName";
@@ -636,13 +635,13 @@ public class GridTab implements DataStatusListener, Evaluatee, Serializable
 		 *	Set Where Clause
 		 */
 		//	Tab Where Clause
-		StringBuilder where = new StringBuilder(m_vo.WhereClause);
+		StringBuffer where = new StringBuffer(m_vo.WhereClause);
 		if (m_vo.onlyCurrentDays > 0)
 		{
 			if (where.length() > 0)
 				where.append(" AND ");
 			where.append("Created >= ");
-			where.append("getDate()-").append(m_vo.onlyCurrentDays);
+			where.append("SysDate-").append(m_vo.onlyCurrentDays);
 		}
 		//	Detail Query
 		if (isDetail())
@@ -739,9 +738,9 @@ public class GridTab implements DataStatusListener, Evaluatee, Serializable
 	public void resetDetailForNewParentRecord() {
 		if (m_mTable.isOpen())
 		{
-			String where = "2=3";
-			m_extendedWhere = where;
-			m_oldQuery = where;
+			StringBuffer where = new StringBuffer("2=3");
+			m_extendedWhere = where.toString();
+			m_oldQuery = where.toString();
 			m_parentNeedSave = true;
 			
 			m_currentRow = -1;
@@ -749,7 +748,7 @@ public class GridTab implements DataStatusListener, Evaluatee, Serializable
 			 *	Query
 			 */
 			if (log.isLoggable(Level.FINE)) log.fine("#" + m_vo.TabNo + " - " + where);		
-			m_mTable.dataRequery(where, m_vo.onlyCurrentRows && !isDetail(), 0);
+			m_mTable.dataRequery(where.toString(), m_vo.onlyCurrentRows && !isDetail(), 0);
 			
 			// Go to Record 0
 			setCurrentRow(0, true);
@@ -888,7 +887,7 @@ public class GridTab implements DataStatusListener, Evaluatee, Serializable
 
 		query.setTableName("xx");
 		// use IN instead of EXISTS as subquery should be highly selective
-		StringBuilder result = new StringBuilder (getTableName()).append(".").append(tabKeyColumn)
+		StringBuffer result = new StringBuffer (getTableName()).append(".").append(tabKeyColumn)
 			.append(" IN (SELECT xx.").append(tabKeyColumn)
 			.append(" FROM ")
 			.append(tableName).append(" xx WHERE ")
@@ -1855,7 +1854,7 @@ public class GridTab implements DataStatusListener, Evaluatee, Serializable
 			int Record_ID;
 			boolean isOrder = m_vo.TableName.startsWith("C_Order");
 			//
-			StringBuilder sql = new StringBuilder("SELECT COUNT(*) AS Lines,c.ISO_Code,o.TotalLines,o.GrandTotal,"
+			StringBuffer sql = new StringBuffer("SELECT COUNT(*) AS Lines,c.ISO_Code,o.TotalLines,o.GrandTotal,"
 				+ "currencyBase(o.GrandTotal,o.C_Currency_ID,o.DateAcct, o.AD_Client_ID,o.AD_Org_ID) AS ConvAmt ");
 			if (isOrder)
 			{
@@ -2382,15 +2381,7 @@ public class GridTab implements DataStatusListener, Evaluatee, Serializable
 		e.CreatedBy = (Integer)getValue("CreatedBy");
 		e.Updated = (Timestamp)getValue("Updated");
 		e.UpdatedBy = (Integer)getValue("UpdatedBy");
-		if (   e.AD_Table_ID == I_AD_OrgInfo.Table_ID
-			|| e.AD_Table_ID == I_AD_ClientInfo.Table_ID
-			|| e.AD_Table_ID == I_AD_Ref_Table.Table_ID
-			|| e.AD_Table_ID == I_C_AcctSchema_Default.Table_ID
-			|| e.AD_Table_ID == I_C_AcctSchema_GL.Table_ID) {
-			e.Record_ID = getValue(m_parents.get(0));
-		} else {
-			e.Record_ID = getValue(m_keyColumnName);
-		}
+		e.Record_ID = getValue(m_keyColumnName);
 		//  Info
 		StringBuilder info = new StringBuilder(getTableName());
 		
@@ -3382,14 +3373,6 @@ public class GridTab implements DataStatusListener, Evaluatee, Serializable
 	public void clearSelection()
 	{
 		selection.clear();
-	}
-
-	public boolean isQuickForm() {
-		return isQuickForm;
-	}
-
-	public void setQuickForm(boolean isQuickForm) {
-		this.isQuickForm = isQuickForm;
 	}
 
 	public GridWindow getGridWindow()

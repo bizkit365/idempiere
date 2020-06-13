@@ -31,7 +31,7 @@ public class X_A_Asset_Delivery extends PO implements I_A_Asset_Delivery, I_Pers
 	/**
 	 *
 	 */
-	private static final long serialVersionUID = 20200413L;
+	private static final long serialVersionUID = 20191121L;
 
     /** Standard Constructor */
     public X_A_Asset_Delivery (Properties ctx, int A_Asset_Delivery_ID, String trxName)
@@ -68,7 +68,7 @@ public class X_A_Asset_Delivery extends PO implements I_A_Asset_Delivery, I_Pers
 
     public String toString()
     {
-      StringBuilder sb = new StringBuilder ("X_A_Asset_Delivery[")
+      StringBuffer sb = new StringBuffer ("X_A_Asset_Delivery[")
         .append(get_ID()).append("]");
       return sb.toString();
     }

@@ -29,7 +29,7 @@ public class X_AD_CtxHelpSuggestion extends PO implements I_AD_CtxHelpSuggestion
 	/**
 	 *
 	 */
-	private static final long serialVersionUID = 20200413L;
+	private static final long serialVersionUID = 20191121L;
 
     /** Standard Constructor */
     public X_AD_CtxHelpSuggestion (Properties ctx, int AD_CtxHelpSuggestion_ID, String trxName)
@@ -77,7 +77,7 @@ public class X_AD_CtxHelpSuggestion extends PO implements I_AD_CtxHelpSuggestion
 
     public String toString()
     {
-      StringBuilder sb = new StringBuilder ("X_AD_CtxHelpSuggestion[")
+      StringBuffer sb = new StringBuffer ("X_AD_CtxHelpSuggestion[")
         .append(get_ID()).append("]");
       return sb.toString();
     }

@@ -31,7 +31,7 @@ public class X_T_Replenish extends PO implements I_T_Replenish, I_Persistent
 	/**
 	 *
 	 */
-	private static final long serialVersionUID = 20200413L;
+	private static final long serialVersionUID = 20191121L;
 
     /** Standard Constructor */
     public X_T_Replenish (Properties ctx, int T_Replenish_ID, String trxName)
@@ -72,7 +72,7 @@ public class X_T_Replenish extends PO implements I_T_Replenish, I_Persistent
 
     public String toString()
     {
-      StringBuilder sb = new StringBuilder ("X_T_Replenish[")
+      StringBuffer sb = new StringBuffer ("X_T_Replenish[")
         .append(get_ID()).append("]");
       return sb.toString();
     }

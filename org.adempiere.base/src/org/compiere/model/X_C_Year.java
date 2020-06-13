@@ -30,7 +30,7 @@ public class X_C_Year extends PO implements I_C_Year, I_Persistent
 	/**
 	 *
 	 */
-	private static final long serialVersionUID = 20200413L;
+	private static final long serialVersionUID = 20191121L;
 
     /** Standard Constructor */
     public X_C_Year (Properties ctx, int C_Year_ID, String trxName)
@@ -67,7 +67,7 @@ public class X_C_Year extends PO implements I_C_Year, I_Persistent
 
     public String toString()
     {
-      StringBuilder sb = new StringBuilder ("X_C_Year[")
+      StringBuffer sb = new StringBuffer ("X_C_Year[")
         .append(get_ID()).append("]");
       return sb.toString();
     }

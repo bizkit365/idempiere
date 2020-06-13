@@ -30,7 +30,7 @@ public class X_C_ValidCombination extends PO implements I_C_ValidCombination, I_
 	/**
 	 *
 	 */
-	private static final long serialVersionUID = 20200413L;
+	private static final long serialVersionUID = 20191121L;
 
     /** Standard Constructor */
     public X_C_ValidCombination (Properties ctx, int C_ValidCombination_ID, String trxName)
@@ -68,7 +68,7 @@ public class X_C_ValidCombination extends PO implements I_C_ValidCombination, I_
 
     public String toString()
     {
-      StringBuilder sb = new StringBuilder ("X_C_ValidCombination[")
+      StringBuffer sb = new StringBuffer ("X_C_ValidCombination[")
         .append(get_ID()).append("]");
       return sb.toString();
     }

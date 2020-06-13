@@ -32,7 +32,6 @@ import org.adempiere.webui.panel.ChangePasswordPanel;
 import org.adempiere.webui.panel.LoginPanel;
 import org.adempiere.webui.panel.ResetPasswordPanel;
 import org.adempiere.webui.panel.RolePanel;
-import org.adempiere.webui.session.SessionContextListener;
 import org.adempiere.webui.theme.ThemeManager;
 import org.compiere.model.MSysConfig;
 import org.compiere.model.MUser;
@@ -181,15 +180,9 @@ public class LoginWindow extends FWindow implements EventListener<Event>
        }
     }
     
-    /**
-     * Show change role window
-     * @param locale
-     * @param ctx
-     */
     public void changeRole(Locale locale, Properties ctx)
     {
     	Env.setCtx(ctx);
-    	getDesktop().getSession().setAttribute(SessionContextListener.SESSION_CTX, ctx);
     	
     	//reload theme preference
     	PageDefinition pageDefintion = Executions.getCurrent().getPageDefinition(ThemeManager.getThemeResource("preference.zul"));
