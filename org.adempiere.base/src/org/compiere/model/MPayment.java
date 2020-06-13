@@ -2171,7 +2171,7 @@ public class MPayment extends X_C_Payment
 			return null;
 		//	Business Partner needs to be linked to Org
 		MBPartner bp = new MBPartner (getCtx(), getC_BPartner_ID(), get_TrxName());
-		int counterAD_Org_ID = bp.getAD_OrgBP_ID(); 
+		int counterAD_Org_ID = bp.getAD_OrgBP_ID_Int(); 
 		if (counterAD_Org_ID == 0)
 			return null;
 		
@@ -2339,10 +2339,6 @@ public class MPayment extends X_C_Payment
 			Msg.translate(getCtx(), "C_Payment_ID") + ": " + getDocumentNo() + " [1]", get_TrxName());
 		alloc.setAD_Org_ID(getAD_Org_ID());
 		alloc.setDateAcct(getDateAcct()); // in case date acct is different from datetrx in payment
-		MInvoice invoice = new MInvoice(getCtx(), getC_Invoice_ID(), get_TrxName());
-		if (invoice.getDateAcct().after(alloc.getDateAcct())) {
-			alloc.setDateAcct(invoice.getDateAcct());
-		}
 		alloc.saveEx();
 		MAllocationLine aLine = null;
 		if (isReceipt())

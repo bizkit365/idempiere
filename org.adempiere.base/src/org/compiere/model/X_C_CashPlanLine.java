@@ -33,7 +33,7 @@ public class X_C_CashPlanLine extends PO implements I_C_CashPlanLine, I_Persiste
 	/**
 	 *
 	 */
-	private static final long serialVersionUID = 20200413L;
+	private static final long serialVersionUID = 20191121L;
 
     /** Standard Constructor */
     public X_C_CashPlanLine (Properties ctx, int C_CashPlanLine_ID, String trxName)
@@ -75,8 +75,8 @@ public class X_C_CashPlanLine extends PO implements I_C_CashPlanLine, I_Persiste
 
     public String toString()
     {
-      StringBuilder sb = new StringBuilder ("X_C_CashPlanLine[")
-        .append(get_ID()).append(",Name=").append(getName()).append("]");
+      StringBuffer sb = new StringBuffer ("X_C_CashPlanLine[")
+        .append(get_ID()).append("]");
       return sb.toString();
     }
 

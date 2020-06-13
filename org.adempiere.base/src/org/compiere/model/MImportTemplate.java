@@ -158,7 +158,7 @@ public class MImportTemplate extends X_AD_ImportTemplate
 		BufferedWriter bw = null;
 		try {
 			tmpfile = File.createTempFile("CSVImportAction", "csv");
-			bw = new BufferedWriter(new FileWriter(tmpfile,charset));
+			bw = new BufferedWriter(new FileWriter(tmpfile));
 			String firstLine = null;
 			String line = null;
 			while ((line = reader.readLine()) != null) {

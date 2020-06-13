@@ -272,6 +272,7 @@ public class WAttachment extends Window implements EventListener<Event>
 		div.appendChild(toolBar);
 		text.setRows(3);
 		ZKUpdateUtil.setHflex(text, "1");
+		ZKUpdateUtil.setHeight(text, "100%");
 		
 		div.appendChild(text);
 		northPanel.appendChild(div);
@@ -574,6 +575,7 @@ public class WAttachment extends Window implements EventListener<Event>
 		} else if (e.getTarget() == bDeleteAll) {
 			//	Delete Attachment
 			deleteAttachment();
+			dispose();
 		} else if (e.getTarget() == bDelete) {
 			//	Delete individual entry and Return
 			deleteAttachmentEntry();
@@ -674,7 +676,6 @@ public class WAttachment extends Window implements EventListener<Event>
 						m_attachment.delete(true);
 						m_attachment = null;
 					}
-					dispose();
 				}					
 			}
 		});			

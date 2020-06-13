@@ -126,7 +126,7 @@ public class MReportLineSet extends X_PA_ReportLineSet
 	 */
 	public String toString ()
 	{
-		StringBuilder sb = new StringBuilder ("MReportLineSet[")
+		StringBuffer sb = new StringBuffer ("MReportLineSet[")
 			.append(get_ID()).append(" - ").append(getName())
 			.append ("]");
 		return sb.toString ();

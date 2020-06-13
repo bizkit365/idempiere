@@ -28,6 +28,7 @@ package org.compiere.model;
 import java.sql.ResultSet;
 
 import org.adempiere.base.IModelFactory;
+import org.compiere.model.PO;
 import org.compiere.util.Env;
 
 public class WS_ModelFactory implements IModelFactory {

@@ -29,7 +29,7 @@ public class X_ASP_Task extends PO implements I_ASP_Task, I_Persistent
 	/**
 	 *
 	 */
-	private static final long serialVersionUID = 20200413L;
+	private static final long serialVersionUID = 20191121L;
 
     /** Standard Constructor */
     public X_ASP_Task (Properties ctx, int ASP_Task_ID, String trxName)
@@ -67,7 +67,7 @@ public class X_ASP_Task extends PO implements I_ASP_Task, I_Persistent
 
     public String toString()
     {
-      StringBuilder sb = new StringBuilder ("X_ASP_Task[")
+      StringBuffer sb = new StringBuffer ("X_ASP_Task[")
         .append(get_ID()).append("]");
       return sb.toString();
     }

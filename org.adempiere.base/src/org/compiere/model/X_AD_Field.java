@@ -32,7 +32,7 @@ public class X_AD_Field extends PO implements I_AD_Field, I_Persistent
 	/**
 	 *
 	 */
-	private static final long serialVersionUID = 20200413L;
+	private static final long serialVersionUID = 20191121L;
 
     /** Standard Constructor */
     public X_AD_Field (Properties ctx, int AD_Field_ID, String trxName)
@@ -55,8 +55,6 @@ public class X_AD_Field extends PO implements I_AD_Field, I_Persistent
 			setIsFieldOnly (false);
 			setIsHeading (false);
 			setIsQuickEntry (false);
-// N
-			setIsQuickForm (false);
 // N
 			setIsReadOnly (false);
 			setIsSameLine (false);
@@ -87,8 +85,8 @@ public class X_AD_Field extends PO implements I_AD_Field, I_Persistent
 
     public String toString()
     {
-      StringBuilder sb = new StringBuilder ("X_AD_Field[")
-        .append(get_ID()).append(",Name=").append(getName()).append("]");
+      StringBuffer sb = new StringBuffer ("X_AD_Field[")
+        .append(get_ID()).append("]");
       return sb.toString();
     }
 
@@ -776,30 +774,6 @@ public class X_AD_Field extends PO implements I_AD_Field, I_Persistent
 	public boolean isQuickEntry () 
 	{
 		Object oo = get_Value(COLUMNNAME_IsQuickEntry);
-		if (oo != null) 
-		{
-			 if (oo instanceof Boolean) 
-				 return ((Boolean)oo).booleanValue(); 
-			return "Y".equals(oo);
-		}
-		return false;
-	}
-
-	/** Set Quick Form.
-		@param IsQuickForm 
-		Display in Quick Form
-	  */
-	public void setIsQuickForm (boolean IsQuickForm)
-	{
-		set_Value (COLUMNNAME_IsQuickForm, Boolean.valueOf(IsQuickForm));
-	}
-
-	/** Get Quick Form.
-		@return Display in Quick Form
-	  */
-	public boolean isQuickForm () 
-	{
-		Object oo = get_Value(COLUMNNAME_IsQuickForm);
 		if (oo != null) 
 		{
 			 if (oo instanceof Boolean) 

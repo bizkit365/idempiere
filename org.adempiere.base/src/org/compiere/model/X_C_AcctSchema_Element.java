@@ -30,7 +30,7 @@ public class X_C_AcctSchema_Element extends PO implements I_C_AcctSchema_Element
 	/**
 	 *
 	 */
-	private static final long serialVersionUID = 20200413L;
+	private static final long serialVersionUID = 20191121L;
 
     /** Standard Constructor */
     public X_C_AcctSchema_Element (Properties ctx, int C_AcctSchema_Element_ID, String trxName)
@@ -74,8 +74,8 @@ public class X_C_AcctSchema_Element extends PO implements I_C_AcctSchema_Element
 
     public String toString()
     {
-      StringBuilder sb = new StringBuilder ("X_C_AcctSchema_Element[")
-        .append(get_ID()).append(",Name=").append(getName()).append("]");
+      StringBuffer sb = new StringBuffer ("X_C_AcctSchema_Element[")
+        .append(get_ID()).append("]");
       return sb.toString();
     }
 

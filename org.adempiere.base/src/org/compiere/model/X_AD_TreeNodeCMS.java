@@ -29,7 +29,7 @@ public class X_AD_TreeNodeCMS extends PO implements I_AD_TreeNodeCMS, I_Persiste
 	/**
 	 *
 	 */
-	private static final long serialVersionUID = 20200413L;
+	private static final long serialVersionUID = 20191121L;
 
     /** Standard Constructor */
     public X_AD_TreeNodeCMS (Properties ctx, int AD_TreeNodeCMS_ID, String trxName)
@@ -67,7 +67,7 @@ public class X_AD_TreeNodeCMS extends PO implements I_AD_TreeNodeCMS, I_Persiste
 
     public String toString()
     {
-      StringBuilder sb = new StringBuilder ("X_AD_TreeNodeCMS[")
+      StringBuffer sb = new StringBuffer ("X_AD_TreeNodeCMS[")
         .append(get_ID()).append("]");
       return sb.toString();
     }

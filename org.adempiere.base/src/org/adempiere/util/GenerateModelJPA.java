@@ -131,7 +131,7 @@ public class GenerateModelJPA
 		//String className = "X_" + tableName;
                 String className = "" + tableName;
 		//
-		StringBuilder start = new StringBuilder ()
+		StringBuffer start = new StringBuffer ()
 			.append (COPY)
 			.append ("package " + packageName + ";\n"
 				+ "/** Generated Model JPA - DO NOT CHANGE */\n");
@@ -200,12 +200,12 @@ public class GenerateModelJPA
 			+ "/** Info\n@return info\n*/\n"
 			+ "public String toString()"
 			+ "{"
-			+ "StringBuilder sb = new StringBuilder (\"").append(className).append("[\")"
+			+ "StringBuffer sb = new StringBuffer (\"").append(className).append("[\")"
 			+ ".append(get_ID()).append(\"]\");"
 			+ "return sb.toString();"
 			+ "}");
 
-		StringBuilder end = new StringBuilder ("}");
+		StringBuffer end = new StringBuffer ("}");
 		//
 		sb.insert(0, start);
 		sb.append(end);
@@ -538,9 +538,9 @@ public class GenerateModelJPA
 			.append("_AD_Reference_ID=").append(AD_Reference_ID).append(";");
 		//
 		boolean found = false;
-		StringBuilder values = new StringBuilder("Reference_ID=")
+		StringBuffer values = new StringBuffer("Reference_ID=")
 			.append(AD_Reference_ID);
-		StringBuilder statement = new StringBuilder();
+		StringBuffer statement = new StringBuffer();
 		if (nullable)
 			statement.append("if (").append(columnName).append(" == null");
 		//
@@ -573,7 +573,7 @@ public class GenerateModelJPA
 				//	Name (SmallTalkNotation)
 				String name = rs.getString(2);
 				char[] nameArray = name.toCharArray();
-				StringBuilder nameClean = new StringBuilder();
+				StringBuffer nameClean = new StringBuffer();
 				boolean initCap = true;
 				for (int i = 0; i < nameArray.length; i++)
 				{
@@ -708,7 +708,7 @@ public class GenerateModelJPA
 	 */
 	public String toString()
 	{
-		StringBuilder sb = new StringBuilder ("GenerateModel[")
+		StringBuffer sb = new StringBuffer ("GenerateModel[")
 			.append("]");
 		return sb.toString();
 	}	//	toString
@@ -766,7 +766,7 @@ public class GenerateModelJPA
 			System.err.println("No EntityType");
 			System.exit(1);
 		}
-		StringBuilder sql = new StringBuilder("EntityType IN (")
+		StringBuffer sql = new StringBuffer("EntityType IN (")
 			.append(entityType).append(")");
 		if (log.isLoggable(Level.INFO)) log.info(sql.toString());
 		log.info("----------------------------------");

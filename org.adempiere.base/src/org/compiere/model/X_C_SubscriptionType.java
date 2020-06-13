@@ -30,7 +30,7 @@ public class X_C_SubscriptionType extends PO implements I_C_SubscriptionType, I_
 	/**
 	 *
 	 */
-	private static final long serialVersionUID = 20200413L;
+	private static final long serialVersionUID = 20191121L;
 
     /** Standard Constructor */
     public X_C_SubscriptionType (Properties ctx, int C_SubscriptionType_ID, String trxName)
@@ -68,8 +68,8 @@ public class X_C_SubscriptionType extends PO implements I_C_SubscriptionType, I_
 
     public String toString()
     {
-      StringBuilder sb = new StringBuilder ("X_C_SubscriptionType[")
-        .append(get_ID()).append(",Name=").append(getName()).append("]");
+      StringBuffer sb = new StringBuffer ("X_C_SubscriptionType[")
+        .append(get_ID()).append("]");
       return sb.toString();
     }
 

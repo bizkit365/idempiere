@@ -100,7 +100,7 @@ public class GenericPO extends PO {
 	}
 
 	public String toString() {
-		StringBuilder sb = new StringBuilder("GenericPO[Table=").append(
+		StringBuffer sb = new StringBuffer("GenericPO[Table=").append(
 				"" + tableID + ",ID=").append(get_ID()).append("]");
 		return sb.toString();
 	}

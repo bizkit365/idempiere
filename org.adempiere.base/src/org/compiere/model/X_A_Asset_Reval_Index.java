@@ -33,7 +33,7 @@ public class X_A_Asset_Reval_Index extends PO implements I_A_Asset_Reval_Index, 
 	/**
 	 *
 	 */
-	private static final long serialVersionUID = 20200413L;
+	private static final long serialVersionUID = 20191121L;
 
     /** Standard Constructor */
     public X_A_Asset_Reval_Index (Properties ctx, int A_Asset_Reval_Index_ID, String trxName)
@@ -72,7 +72,7 @@ public class X_A_Asset_Reval_Index extends PO implements I_A_Asset_Reval_Index, 
 
     public String toString()
     {
-      StringBuilder sb = new StringBuilder ("X_A_Asset_Reval_Index[")
+      StringBuffer sb = new StringBuffer ("X_A_Asset_Reval_Index[")
         .append(get_ID()).append("]");
       return sb.toString();
     }

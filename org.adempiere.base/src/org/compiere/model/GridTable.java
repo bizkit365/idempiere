@@ -104,7 +104,7 @@ public class GridTable extends AbstractTableModel
 	/**
 	 * 
 	 */
-	private static final long serialVersionUID = -3190218965990521698L;
+	private static final long serialVersionUID = 817894725729408648L;
 
 	public static final String DATA_REFRESH_MESSAGE = "Refreshed";
 	public static final String DATA_UPDATE_COPIED_MESSAGE = "UpdateCopied";
@@ -400,7 +400,7 @@ public class GridTable extends AbstractTableModel
 				where.append(" AND ");
 			//	Show only unprocessed or the one updated within x days
 			where.append("(Processed='N' OR Updated>");
-			where.append("getDate()-1");
+			where.append("SysDate-1");
 			where.append(")");
 		}
 
@@ -904,13 +904,7 @@ public class GridTable extends AbstractTableModel
 		}
 		if (getRowCount() == 0)
 			return;
-
-		GridField field = getField(col);
-
-		// Ignoring new record while sorting
-		if (field.getGridTab().isQuickForm())
-			dataIgnore();
-
+		
 		boolean isSameSortEntries = (col == m_lastSortColumnIndex && ascending == m_lastSortedAscending);
 		if (!isSameSortEntries)
 		{
@@ -921,6 +915,7 @@ public class GridTable extends AbstractTableModel
 		//cache changed row
 		Object[] changedRow = m_rowChanged >= 0 ? getDataAtRow(m_rowChanged) : null;
 
+		GridField field = getField (col);
 		//	RowIDs are not sorted
 		if (field.getDisplayType() == DisplayType.RowID)
 			return;
@@ -2077,7 +2072,7 @@ public class GridTable extends AbstractTableModel
 			
 			//	Need to re-read row to get ROWID, Key, DocumentNo, Trigger, virtual columns
 			if (log.isLoggable(Level.FINE)) log.fine("Reading ... " + whereClause);
-			StringBuilder refreshSQL = new StringBuilder(m_SQL_Select)
+			StringBuffer refreshSQL = new StringBuffer(m_SQL_Select)
 				.append(" WHERE ").append(whereClause);
 			pstmt = DB.prepareStatement(refreshSQL.toString(), null);
 			rs = pstmt.executeQuery();
@@ -2279,7 +2274,7 @@ public class GridTable extends AbstractTableModel
 		//	Refresh - update buffer
 		String whereClause = po.get_WhereClause(true);
 		if (log.isLoggable(Level.FINE)) log.fine("Reading ... " + whereClause);
-		StringBuilder refreshSQL = new StringBuilder(m_SQL_Select)
+		StringBuffer refreshSQL = new StringBuffer(m_SQL_Select)
 			.append(" WHERE ").append(whereClause);
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
@@ -2349,8 +2344,8 @@ public class GridTable extends AbstractTableModel
 	private String getWhereClause (Object[] rowData)
 	{
 		int size = m_fields.size();
-		StringBuilder singleRowWHERE = null;
-		StringBuilder multiRowWHERE = null;
+		StringBuffer singleRowWHERE = null;
+		StringBuffer multiRowWHERE = null;
 		String tableName = getTableName();
 		for (int col = 0; col < size; col++)
 		{
@@ -2365,10 +2360,10 @@ public class GridTable extends AbstractTableModel
 					return null;
 				}
 				if (columnName.endsWith ("_ID"))
-					singleRowWHERE = new StringBuilder(tableName).append(".").append(columnName)
+					singleRowWHERE = new StringBuffer(tableName).append(".").append(columnName)
 						.append ("=").append (value);
 				else
-					singleRowWHERE = new StringBuilder(tableName).append(".").append(columnName)
+					singleRowWHERE = new StringBuffer(tableName).append(".").append(columnName)
 						.append ("=").append (DB.TO_STRING(value.toString()));
 			}
 			else if (field.isParentColumn())
@@ -2381,16 +2376,13 @@ public class GridTable extends AbstractTableModel
 					continue;
 				}
 				if (multiRowWHERE == null)
-					multiRowWHERE = new StringBuilder();
+					multiRowWHERE = new StringBuffer();
 				else
 					multiRowWHERE.append(" AND ");
 				if (columnName.endsWith ("_ID"))
 					multiRowWHERE.append (tableName).append(".").append(columnName)
 						.append ("=").append (value);
-				else if (value instanceof Timestamp) {
-					multiRowWHERE.append (tableName).append(".").append(columnName)
-					.append ("=").append (DB.TO_DATE((Timestamp)value, false));
-				}else
+				else
 					multiRowWHERE.append (tableName).append(".").append(columnName)
 						.append ("=").append (DB.TO_STRING(value.toString()));
 			}
@@ -3489,7 +3481,7 @@ public class GridTable extends AbstractTableModel
 	 */
 	public String toString()
 	{
-		return new StringBuilder("MTable[").append(m_tableName)
+		return new StringBuffer("MTable[").append(m_tableName)
 			.append(",WindowNo=").append(m_WindowNo)
 			.append(",Tab=").append(m_TabNo).append("]").toString();
 	}   //  toString
@@ -3983,13 +3975,5 @@ public class GridTable extends AbstractTableModel
 
 	public int getKeyColumnIndex() {
 		return m_indexKeyColumn;
-	}
-
-	/**
-	 * Index of updated row's
-	 */
-	public int getRowChanged()
-	{
-		return m_rowChanged;
 	}
 }

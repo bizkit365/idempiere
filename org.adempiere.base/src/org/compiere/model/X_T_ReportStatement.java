@@ -33,7 +33,7 @@ public class X_T_ReportStatement extends PO implements I_T_ReportStatement, I_Pe
 	/**
 	 *
 	 */
-	private static final long serialVersionUID = 20200413L;
+	private static final long serialVersionUID = 20191121L;
 
     /** Standard Constructor */
     public X_T_ReportStatement (Properties ctx, int T_ReportStatement_ID, String trxName)
@@ -71,8 +71,8 @@ public class X_T_ReportStatement extends PO implements I_T_ReportStatement, I_Pe
 
     public String toString()
     {
-      StringBuilder sb = new StringBuilder ("X_T_ReportStatement[")
-        .append(get_ID()).append(",Name=").append(getName()).append("]");
+      StringBuffer sb = new StringBuffer ("X_T_ReportStatement[")
+        .append(get_ID()).append("]");
       return sb.toString();
     }
 

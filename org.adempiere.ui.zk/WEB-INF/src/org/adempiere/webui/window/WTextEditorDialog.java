@@ -118,7 +118,7 @@ public class WTextEditorDialog extends Window implements EventListener<Event>{
 		tabPanels.appendChild(tabPanel);
 		textBox = new Textbox(text);
 		textBox.setCols(80);
-		textBox.setMultiline(true);
+		textBox.setRows(30);
 		ZKUpdateUtil.setHeight(textBox, "100%");
 		textBox.setEnabled(editable);
 		ZKUpdateUtil.setHflex(textBox, "1");
@@ -273,11 +273,7 @@ public class WTextEditorDialog extends Window implements EventListener<Event>{
 				.and(Sanitizers.LINKS)
 				.and(Sanitizers.STYLES)
 				.and(Sanitizers.TABLES);
-
-		String ret = policy.sanitize(untrustedHTML);
-		ret = ret.replaceAll("&#35;", "#");
-		ret = ret.replaceAll("&#64;", "@");
-
-		return ret;
+		return policy.sanitize(untrustedHTML);
 	}
+
 }

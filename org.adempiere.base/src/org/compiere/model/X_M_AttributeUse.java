@@ -30,7 +30,7 @@ public class X_M_AttributeUse extends PO implements I_M_AttributeUse, I_Persiste
 	/**
 	 *
 	 */
-	private static final long serialVersionUID = 20200413L;
+	private static final long serialVersionUID = 20191121L;
 
     /** Standard Constructor */
     public X_M_AttributeUse (Properties ctx, int M_AttributeUse_ID, String trxName)
@@ -68,7 +68,7 @@ public class X_M_AttributeUse extends PO implements I_M_AttributeUse, I_Persiste
 
     public String toString()
     {
-      StringBuilder sb = new StringBuilder ("X_M_AttributeUse[")
+      StringBuffer sb = new StringBuffer ("X_M_AttributeUse[")
         .append(get_ID()).append("]");
       return sb.toString();
     }

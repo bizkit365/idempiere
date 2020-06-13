@@ -93,4 +93,5 @@ public class SessionManager
     	if (app != null)
     		app.changeRole(user);
     }
+
 }

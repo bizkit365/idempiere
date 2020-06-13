@@ -66,7 +66,6 @@ import org.compiere.util.Env;
 import org.compiere.util.Msg;
 import org.compiere.util.Trace;
 import org.compiere.util.Trx;
-import org.compiere.util.TrxEventListener;
 import org.compiere.util.Util;
 
 /**
@@ -811,7 +810,7 @@ public class MWFActivity extends X_AD_WF_Activity implements Runnable
 			+ "       AND n.Action = 'C' "
 			+ "       AND a.WFState = 'CC' "
 			+ "       AND a.UpdatedBy = " + userid
-			+ "       AND a.Updated > Trunc(getDate()) - " + (days-1)
+			+ "       AND a.Updated > Trunc(SYSDATE) - " + (days-1)
 			+ checkSameSO
 			+ checkSameReceipt
 			+ checkDocAction;
@@ -973,7 +972,6 @@ public class MWFActivity extends X_AD_WF_Activity implements Runnable
 				if (contextLost)
 					Env.getCtx().remove("#AD_Client_ID");
 			}
-			throw new AdempiereException(e);
 		}
 		finally
 		{
@@ -1009,8 +1007,6 @@ public class MWFActivity extends X_AD_WF_Activity implements Runnable
 			Calendar cal = Calendar.getInstance();
 			cal.add(Calendar.MINUTE, m_node.getWaitTime());
 			setEndWaitTime(new Timestamp(cal.getTimeInMillis()));
-			if (m_node.getWaitTime() == -1)
-				prepareCommitEvent();
 			return false;		//	not done
 		}
 
@@ -1233,7 +1229,7 @@ public class MWFActivity extends X_AD_WF_Activity implements Runnable
 						MUserRoles[] urs = MUserRoles.getOfRole(getCtx(), resp.getAD_Role_ID());
 						for (int i = 0; i < urs.length; i++)
 						{
-							if(urs[i].getAD_User_ID() == Env.getAD_User_ID(getCtx()) && urs[i].isActive())
+							if(urs[i].getAD_User_ID() == Env.getAD_User_ID(getCtx()))
 							{
 								autoApproval = true;
 								break;
@@ -1983,44 +1979,5 @@ public class MWFActivity extends X_AD_WF_Activity implements Runnable
 		}
 		return sb.toString();
 	}	//	getSummary
-	
-	private void prepareCommitEvent()
-	{
-		Trx trx = null;
-		if (get_TrxName() == null)
-		{
-			return; // no transaction, nothing to commit
-		}
-		MWFActivity activity = new MWFActivity (getCtx(), get_ID(), get_TrxName());
-		trx = Trx.get(get_TrxName(), true);
-		trx.addTrxEventListener(new TrxListener(activity));		
-	}
 
-	
-	
-	static class TrxListener implements TrxEventListener {
-
-		private MWFActivity activity;
-
-		protected TrxListener(MWFActivity activity) {
-			this.activity = activity;
-		}
-		
-		@Override
-		public void afterRollback(Trx trx, boolean success) {
-		}
-		
-		@Override
-		public void afterCommit(Trx trx, boolean success) {
-			if (success) {
-				trx.removeTrxEventListener(this);
-				activity.setWFState (StateEngine.STATE_Completed);
-			}
-		}
-		
-		@Override
-		public void afterClose(Trx trx) {
-			trx.removeTrxEventListener(this);
-		}		
-	}
 }	//	MWFActivity

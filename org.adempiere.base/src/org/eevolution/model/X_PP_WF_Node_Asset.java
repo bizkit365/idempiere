@@ -30,7 +30,7 @@ public class X_PP_WF_Node_Asset extends PO implements I_PP_WF_Node_Asset, I_Pers
 	/**
 	 *
 	 */
-	private static final long serialVersionUID = 20200413L;
+	private static final long serialVersionUID = 20191121L;
 
     /** Standard Constructor */
     public X_PP_WF_Node_Asset (Properties ctx, int PP_WF_Node_Asset_ID, String trxName)
@@ -68,7 +68,7 @@ public class X_PP_WF_Node_Asset extends PO implements I_PP_WF_Node_Asset, I_Pers
 
     public String toString()
     {
-      StringBuilder sb = new StringBuilder ("X_PP_WF_Node_Asset[")
+      StringBuffer sb = new StringBuffer ("X_PP_WF_Node_Asset[")
         .append(get_ID()).append("]");
       return sb.toString();
     }

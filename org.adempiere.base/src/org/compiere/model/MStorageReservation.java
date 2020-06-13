@@ -261,7 +261,7 @@ public class MStorageReservation extends X_M_StorageReservation {
 	 * @param addition
 	 */
 	public void addQty(BigDecimal addition) {
-		final String sql = "UPDATE M_StorageReservation SET Qty=Qty+?, Updated=getDate(), UpdatedBy=? " +
+		final String sql = "UPDATE M_StorageReservation SET Qty=Qty+?, Updated=SYSDATE, UpdatedBy=? " +
 				"WHERE M_Product_ID=? AND M_Warehouse_ID=? AND M_AttributeSetInstance_ID=? AND IsSOTrx=?";
 		DB.executeUpdateEx(sql, 
 			new Object[] {addition, Env.getAD_User_ID(Env.getCtx()), getM_Product_ID(), getM_Warehouse_ID(), getM_AttributeSetInstance_ID(), isSOTrx()}, 
@@ -328,7 +328,7 @@ public class MStorageReservation extends X_M_StorageReservation {
 	 */
 	public String toString()
 	{
-		StringBuilder sb = new StringBuilder("MStorageReservation[")
+		StringBuffer sb = new StringBuffer("MStorageReservation[")
 			.append("M_Warehouse_ID=").append(getM_Warehouse_ID())
 			.append(",M_Product_ID=").append(getM_Product_ID())
 			.append(",M_AttributeSetInstance_ID=").append(getM_AttributeSetInstance_ID())

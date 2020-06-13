@@ -565,9 +565,9 @@ public class CreateAdempiere
 	 */
 	private boolean createTableDataRow (ResultSet rs, MTable mTable)
 	{
-		StringBuilder insert = new StringBuilder ("INSERT INTO ")
+		StringBuffer insert = new StringBuffer ("INSERT INTO ")
 			.append(mTable.getTableName()).append(" (");
-		StringBuilder values = new StringBuilder ();
+		StringBuffer values = new StringBuffer ();
 		//
 		MColumn[] columns = mTable.getColumns(false);
 		for (int i = 0; i < columns.length; i++)

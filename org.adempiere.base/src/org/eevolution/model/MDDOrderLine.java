@@ -405,7 +405,7 @@ public class MDDOrderLine extends X_DD_OrderLine
 	 */
 	public String toString ()
 	{
-		StringBuilder sb = new StringBuilder ("MDDOrderLine[")
+		StringBuffer sb = new StringBuffer ("MDDOrderLine[")
 			.append(get_ID()).append(",Line=").append(getLine())
 			.append(",Ordered=").append(getQtyOrdered())
 			.append(",Delivered=").append(getQtyDelivered())

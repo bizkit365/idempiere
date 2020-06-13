@@ -28,10 +28,11 @@ import java.util.Properties;
  */
 public class MPOSKey extends X_C_POSKey
 {
+
 	/**
 	 * 
 	 */
-	private static final long serialVersionUID = 2595668386249398840L;
+	private static final long serialVersionUID = -5810613982853803837L;
 
 	/**
 	 * 	Standard Constructor
@@ -54,17 +55,5 @@ public class MPOSKey extends X_C_POSKey
 	{
 		super(ctx, rs, trxName);
 	}	//	MPOSKey
-
-	@Override
-	protected boolean postDelete() {
-		if (getAD_Image_ID() > 0) {
-			MImage img = new MImage(getCtx(), getAD_Image_ID(), get_TrxName());
-			if (!img.delete(true)) {
-				log.warning("Associated image could not be deleted for POS Key - AD_Image_ID=" + getAD_Image_ID());
-				return false;
-			}
-		}
-		return true;
-	}
 
 }	//	MPOSKey

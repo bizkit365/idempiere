@@ -22,7 +22,6 @@ import java.util.List;
 import java.util.Properties;
 import java.util.logging.Level;
 
-import org.compiere.util.CCache;
 import org.compiere.util.CLogger;
 import org.compiere.util.Env;
 
@@ -41,8 +40,6 @@ public class MAccount extends X_C_ValidCombination
 	 * 
 	 */
 	private static final long serialVersionUID = 7980515458720808532L;
-	
-	private static final CCache<Integer, MAccount> s_cache = new CCache<Integer, MAccount>(Table_Name, 100);
 
 	/*
 	 * Deprecated - use the same method with trxName instead
@@ -368,20 +365,8 @@ public class MAccount extends X_C_ValidCombination
 	 */
 	public static MAccount get (Properties ctx, int C_ValidCombination_ID)
 	{
-		MAccount account = s_cache.get(C_ValidCombination_ID);
-		if (account != null && account.getCtx() == ctx)
-			return account;
-		
-		account = new MAccount(ctx, C_ValidCombination_ID, null);
-		if (account.getC_ValidCombination_ID() == C_ValidCombination_ID) 
-		{
-			s_cache.put(C_ValidCombination_ID, account);
-			return account;
-		}
-		else
-		{
-			return null;
-		}
+		//	Maybe later cache
+		return new MAccount(ctx, C_ValidCombination_ID, null);
 	}   //  getAccount
 
 	/**

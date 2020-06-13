@@ -97,7 +97,7 @@ public class RequestProcessor extends AdempiereServer
 		 */
 		String sql = "SELECT * FROM R_Request "
 			+ "WHERE DueType='" + MRequest.DUETYPE_Scheduled + "' AND Processed='N'"
-			+ " AND DateNextAction < getDate()"
+			+ " AND DateNextAction < SysDate"
 			+ " AND AD_Client_ID=?"; 
 		if (m_model.getR_RequestType_ID() != 0)
 			sql += " AND R_RequestType_ID=?";
@@ -155,7 +155,7 @@ public class RequestProcessor extends AdempiereServer
 			+ " AND AD_Client_ID=?"
 			+ " AND EXISTS (SELECT * FROM R_RequestType rt "
 				+ "WHERE r.R_RequestType_ID=rt.R_RequestType_ID"
-				+ " AND (r.DateNextAction+rt.DueDateTolerance) < getDate())";
+				+ " AND (r.DateNextAction+rt.DueDateTolerance) < SysDate)";
 		if (m_model.getR_RequestType_ID() != 0)
 			sql += " AND r.R_RequestType_ID=?";
 		count = 0;
@@ -210,11 +210,11 @@ public class RequestProcessor extends AdempiereServer
 			sql = "SELECT * FROM R_Request "
 				+ "WHERE Processed='N'"
 				+ " AND AD_Client_ID=?"
-				+ " AND (DateNextAction+" + m_model.getOverdueAlertDays() + ") < getDate()"
+				+ " AND (DateNextAction+" + m_model.getOverdueAlertDays() + ") < SysDate"
 				+ " AND (DateLastAlert IS NULL";
 			if (m_model.getRemindDays() > 0)
 				sql += " OR (DateLastAlert+" + m_model.getRemindDays() 
-					+ ") < getDate()";
+					+ ") < SysDate";
 			sql += ")";
 			if (m_model.getR_RequestType_ID() != 0)
 				sql += " AND R_RequestType_ID=?";
@@ -271,7 +271,7 @@ public class RequestProcessor extends AdempiereServer
 				+ " AND AD_Client_ID=?"
 				+ " AND IsEscalated='N'"
 				+ " AND (DateNextAction+" + m_model.getOverdueAssignDays() 
-					+ ") < getDate()";
+					+ ") < SysDate";
 			if (m_model.getR_RequestType_ID() != 0)
 				sql += " AND R_RequestType_ID=?";
 			count = 0;
@@ -311,11 +311,11 @@ public class RequestProcessor extends AdempiereServer
 			sql = "SELECT * FROM R_Request "
 				+ "WHERE Processed='N'"
 				+ " AND AD_Client_ID=?"
-				+ " AND (Updated+" + m_model.getInactivityAlertDays() + ") < getDate()"
+				+ " AND (Updated+" + m_model.getInactivityAlertDays() + ") < SysDate"
 				+ " AND (DateLastAlert IS NULL";
 			if (m_model.getRemindDays() > 0)
 				sql += " OR (DateLastAlert+" + m_model.getRemindDays() 
-					+ ") < getDate()";
+					+ ") < SysDate";
 			sql += ")";
 			if (m_model.getR_RequestType_ID() != 0)
 				sql += " AND R_RequestType_ID=?";
@@ -432,7 +432,7 @@ public class RequestProcessor extends AdempiereServer
 			+ "SELECT * FROM R_Status s "
 			+ "WHERE r.R_Status_ID=s.R_Status_ID"
 			+ " AND s.TimeoutDays > 0 AND s.Next_Status_ID > 0"
-			+ " AND r.DateLastAction+s.TimeoutDays < getDate()"
+			+ " AND r.DateLastAction+s.TimeoutDays < SysDate"
 			+ ") "
 			+ "ORDER BY R_Status_ID";
 		PreparedStatement pstmt = null;

@@ -174,8 +174,7 @@
 }
 
 .adwindow-gridview-detail {
-	min-height: 200px;
-	height: 35%;
+	height: 200px;
 }
 
 .adwindow-gridview-detail + .z-south-splitter {
@@ -276,13 +275,6 @@
 @media screen and (max-height: 400px) {
 	.adtab-form-borderlayout.mobile.z-borderlayout > div > .adwindow-gridview-detail.z-south {
 		height: 80% !important;
-	}
-}
-
-@media screen and (min-width: 600px) {
-    /* Tablets and bigger */
-	.adwindow-detailpane-adtab-grid-south .z-paging ul>li {
-  		display: inline!important;
 	}
 }
 

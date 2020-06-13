@@ -30,7 +30,7 @@ public class X_M_Product_QualityTest extends PO implements I_M_Product_QualityTe
 	/**
 	 *
 	 */
-	private static final long serialVersionUID = 20200413L;
+	private static final long serialVersionUID = 20191121L;
 
     /** Standard Constructor */
     public X_M_Product_QualityTest (Properties ctx, int M_Product_QualityTest_ID, String trxName)
@@ -68,7 +68,7 @@ public class X_M_Product_QualityTest extends PO implements I_M_Product_QualityTe
 
     public String toString()
     {
-      StringBuilder sb = new StringBuilder ("X_M_Product_QualityTest[")
+      StringBuffer sb = new StringBuffer ("X_M_Product_QualityTest[")
         .append(get_ID()).append("]");
       return sb.toString();
     }

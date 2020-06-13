@@ -93,6 +93,7 @@ public class WLocationDialog extends Window implements EventListener<Event>
 	 * 
 	 */
 	private static final long serialVersionUID = -9116270523919373406L;
+	private static final String LABEL_STYLE = "white-space: nowrap;";
 	/** Logger          */
 	private static final CLogger log = CLogger.getCLogger(WLocationDialog.class);
 	private Label lblAddress1;
@@ -227,29 +228,29 @@ public class WLocationDialog extends Window implements EventListener<Event>
 	private void initComponents()
 	{
 		lblAddress1     = new Label(Msg.getElement(Env.getCtx(), "Address1"));
-		lblAddress1.setSclass("field-label");
+		lblAddress1.setStyle(LABEL_STYLE);
 		lblAddress2     = new Label(Msg.getElement(Env.getCtx(), "Address2"));
-		lblAddress2.setSclass("field-label");
+		lblAddress2.setStyle(LABEL_STYLE);
 		lblAddress3     = new Label(Msg.getElement(Env.getCtx(), "Address3"));
-		lblAddress3.setSclass("field-label");
+		lblAddress3.setStyle(LABEL_STYLE);
 		lblAddress4     = new Label(Msg.getElement(Env.getCtx(), "Address4"));
-		lblAddress4.setSclass("field-label");
+		lblAddress4.setStyle(LABEL_STYLE);
 		lblAddress5     = new Label(Msg.getElement(Env.getCtx(), "Address5"));
-		lblAddress5.setSclass("field-label");
+		lblAddress5.setStyle(LABEL_STYLE);
 		lblComments     = new Label(Msg.getElement(Env.getCtx(), "Comments"));
-		lblComments.setSclass("field-label");
+		lblComments.setStyle(LABEL_STYLE);
 		lblCity         = new Label(Msg.getMsg(Env.getCtx(), "City"));
-		lblCity.setSclass("field-label");
+		lblCity.setStyle(LABEL_STYLE);
 		lblZip          = new Label(Msg.getMsg(Env.getCtx(), "Postal"));
-		lblZip.setSclass("field-label");
+		lblZip.setStyle(LABEL_STYLE);
 		lblRegion       = new Label(Msg.getMsg(Env.getCtx(), "Region"));
-		lblRegion.setSclass("field-label");
+		lblRegion.setStyle(LABEL_STYLE);
 		lblPostal       = new Label(Msg.getMsg(Env.getCtx(), "Postal"));
-		lblPostal.setSclass("field-label");
+		lblPostal.setStyle(LABEL_STYLE);
 		lblPostalAdd    = new Label(Msg.getMsg(Env.getCtx(), "PostalAdd"));
-		lblPostalAdd.setSclass("field-label");
+		lblPostalAdd.setStyle(LABEL_STYLE);
 		lblCountry      = new Label(Msg.getMsg(Env.getCtx(), "Country"));
-		lblCountry.setSclass("field-label");
+		lblCountry.setStyle(LABEL_STYLE);
 
 		txtAddress1 = new Textbox();
 		txtAddress1.setCols(20);
@@ -313,6 +314,7 @@ public class WLocationDialog extends Window implements EventListener<Event>
 		txtResult = new Textbox();
 		txtResult.setCols(2);
 		txtResult.setRows(3);
+		ZKUpdateUtil.setHeight(txtResult, "100%");
 		txtResult.setReadonly(true);
 		
 		cbxValid = new Checkbox();
@@ -349,57 +351,57 @@ public class WLocationDialog extends Window implements EventListener<Event>
 		ZKUpdateUtil.setWidth(column, "70%");
 		
 		Row pnlAddress1 = new Row();
-		pnlAddress1.appendChild(lblAddress1);
+		pnlAddress1.appendChild(lblAddress1.rightAlign());
 		pnlAddress1.appendChild(txtAddress1);
 		ZKUpdateUtil.setHflex(txtAddress1, "1");
 
 		Row pnlAddress2 = new Row();
-		pnlAddress2.appendChild(lblAddress2);
+		pnlAddress2.appendChild(lblAddress2.rightAlign());
 		pnlAddress2.appendChild(txtAddress2);
 		ZKUpdateUtil.setHflex(txtAddress2, "1");
 
 		Row pnlAddress3 = new Row();
-		pnlAddress3.appendChild(lblAddress3);
+		pnlAddress3.appendChild(lblAddress3.rightAlign());
 		pnlAddress3.appendChild(txtAddress3);
 		ZKUpdateUtil.setHflex(txtAddress3, "1");
 
 		Row pnlAddress4 = new Row();
-		pnlAddress4.appendChild(lblAddress4);
+		pnlAddress4.appendChild(lblAddress4.rightAlign());
 		pnlAddress4.appendChild(txtAddress4);
 		ZKUpdateUtil.setHflex(txtAddress4, "1");
 
 		Row pnlAddress5 = new Row();
-		pnlAddress5.appendChild(lblAddress5);
+		pnlAddress5.appendChild(lblAddress5.rightAlign());
 		pnlAddress5.appendChild(txtAddress5);
 		ZKUpdateUtil.setHflex(txtAddress5, "1");
 
 		Row pnlComments = new Row();
-		pnlComments.appendChild(lblComments);
+		pnlComments.appendChild(lblComments.rightAlign());
 		pnlComments.appendChild(txtComments);
 		ZKUpdateUtil.setHflex(txtComments, "1");
 
 		Row pnlCity     = new Row();
-		pnlCity.appendChild(lblCity);
+		pnlCity.appendChild(lblCity.rightAlign());
 		pnlCity.appendChild(txtCity);
 		ZKUpdateUtil.setHflex(txtCity, "1");
 
 		Row pnlPostal   = new Row();
-		pnlPostal.appendChild(lblPostal);
+		pnlPostal.appendChild(lblPostal.rightAlign());
 		pnlPostal.appendChild(txtPostal);
 		ZKUpdateUtil.setHflex(pnlPostal, "1");
 
 		Row pnlPostalAdd = new Row();
-		pnlPostalAdd.appendChild(lblPostalAdd);
+		pnlPostalAdd.appendChild(lblPostalAdd.rightAlign());
 		pnlPostalAdd.appendChild(txtPostalAdd);
 		ZKUpdateUtil.setHflex(txtPostalAdd, "1");
 
 		Row pnlRegion    = new Row();
-		pnlRegion.appendChild(lblRegion);
+		pnlRegion.appendChild(lblRegion.rightAlign());
 		pnlRegion.appendChild(lstRegion);
 		ZKUpdateUtil.setHflex(lstRegion, "1");
 
 		Row pnlCountry  = new Row();
-		pnlCountry.appendChild(lblCountry);
+		pnlCountry.appendChild(lblCountry.rightAlign());
 		pnlCountry.appendChild(lstCountry);
 		ZKUpdateUtil.setHflex(lstCountry, "1");
 

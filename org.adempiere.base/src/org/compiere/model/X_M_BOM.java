@@ -30,7 +30,7 @@ public class X_M_BOM extends PO implements I_M_BOM, I_Persistent
 	/**
 	 *
 	 */
-	private static final long serialVersionUID = 20200413L;
+	private static final long serialVersionUID = 20191121L;
 
     /** Standard Constructor */
     public X_M_BOM (Properties ctx, int M_BOM_ID, String trxName)
@@ -71,8 +71,8 @@ public class X_M_BOM extends PO implements I_M_BOM, I_Persistent
 
     public String toString()
     {
-      StringBuilder sb = new StringBuilder ("X_M_BOM[")
-        .append(get_ID()).append(",Name=").append(getName()).append("]");
+      StringBuffer sb = new StringBuffer ("X_M_BOM[")
+        .append(get_ID()).append("]");
       return sb.toString();
     }
 

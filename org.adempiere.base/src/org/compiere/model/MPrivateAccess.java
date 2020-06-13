@@ -119,7 +119,7 @@ public class MPrivateAccess extends X_AD_Private_Access
 		if (list.size() == 1)
 			return "<>" + list.get(0);
 		//
-		StringBuilder sb = new StringBuilder(" NOT IN(");
+		StringBuffer sb = new StringBuffer(" NOT IN(");
 		for (int i = 0; i < list.size(); i++)
 		{
 			if (i > 0)

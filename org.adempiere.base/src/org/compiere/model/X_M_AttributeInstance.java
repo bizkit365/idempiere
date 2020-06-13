@@ -33,7 +33,7 @@ public class X_M_AttributeInstance extends PO implements I_M_AttributeInstance, 
 	/**
 	 *
 	 */
-	private static final long serialVersionUID = 20200413L;
+	private static final long serialVersionUID = 20191121L;
 
     /** Standard Constructor */
     public X_M_AttributeInstance (Properties ctx, int M_AttributeInstance_ID, String trxName)
@@ -69,7 +69,7 @@ public class X_M_AttributeInstance extends PO implements I_M_AttributeInstance, 
 
     public String toString()
     {
-      StringBuilder sb = new StringBuilder ("X_M_AttributeInstance[")
+      StringBuffer sb = new StringBuffer ("X_M_AttributeInstance[")
         .append(get_ID()).append("]");
       return sb.toString();
     }

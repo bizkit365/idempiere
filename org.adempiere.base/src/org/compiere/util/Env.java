@@ -1665,25 +1665,14 @@ public final class Env
 								else
 									tableName = foreignTable;
 								MTable table = MTable.get(ctx, tableName);
-								String keyCol = tableName + "_ID";
-								boolean isSubTypeTable = false;
-								if (! Util.isEmpty(foreignTable) && ! tableName.equalsIgnoreCase(foreignTable)) {
-									// verify if is a subtype table
-									if (   table.getKeyColumns() != null
-										&& table.getKeyColumns().length == 1
-										&& table.getKeyColumns()[0].equals(foreignTable + "_ID")) {
-										isSubTypeTable = true;
-										keyCol = foreignTable + "_ID";
-									}
-								}
-								if (table != null && (isSubTypeTable || tableName.equalsIgnoreCase(foreignTable) || tableName.equalsIgnoreCase(po.get_TableName()))) {
+								if (table != null && (tableName.equalsIgnoreCase(foreignTable) || tableName.equalsIgnoreCase(po.get_TableName()))) {
 									String columnName = tblIndex > 0 ? format.substring(tblIndex + 1) : format;
 									MColumn column = table.getColumn(columnName);
 									if (column != null) {
 										if (column.isSecure()) {
 											outStr.append("********");
 										} else {
-											String value = DB.getSQLValueString(trxName,"SELECT " + columnName + " FROM " + tableName + " WHERE " + keyCol + "=?", (Integer)v);
+											String value = DB.getSQLValueString(trxName,"SELECT " + columnName + " FROM " + tableName + " WHERE " + tableName + "_ID = ?", (Integer)v);
 											if (value != null)
 												outStr.append(value);
 										}

@@ -13,6 +13,7 @@
  *****************************************************************************/
 package org.adempiere.webui.apps.form;
 
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.Vector;
 import java.util.logging.Level;

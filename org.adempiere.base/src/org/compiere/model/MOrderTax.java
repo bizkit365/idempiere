@@ -258,7 +258,7 @@ public class MOrderTax extends X_C_OrderTax
 	 */
 	public String toString ()
 	{
-		StringBuilder sb = new StringBuilder ("MOrderTax[")
+		StringBuffer sb = new StringBuffer ("MOrderTax[")
 			.append("C_Order_ID=").append(getC_Order_ID())
 			.append(", C_Tax_ID=").append(getC_Tax_ID())
 			.append(", Base=").append(getTaxBaseAmt())

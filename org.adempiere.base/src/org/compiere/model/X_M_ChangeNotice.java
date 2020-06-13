@@ -30,7 +30,7 @@ public class X_M_ChangeNotice extends PO implements I_M_ChangeNotice, I_Persiste
 	/**
 	 *
 	 */
-	private static final long serialVersionUID = 20200413L;
+	private static final long serialVersionUID = 20191121L;
 
     /** Standard Constructor */
     public X_M_ChangeNotice (Properties ctx, int M_ChangeNotice_ID, String trxName)
@@ -69,8 +69,8 @@ public class X_M_ChangeNotice extends PO implements I_M_ChangeNotice, I_Persiste
 
     public String toString()
     {
-      StringBuilder sb = new StringBuilder ("X_M_ChangeNotice[")
-        .append(get_ID()).append(",Name=").append(getName()).append("]");
+      StringBuffer sb = new StringBuffer ("X_M_ChangeNotice[")
+        .append(get_ID()).append("]");
       return sb.toString();
     }
 

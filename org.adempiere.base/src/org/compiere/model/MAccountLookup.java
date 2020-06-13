@@ -145,9 +145,12 @@ public final class MAccountLookup extends Lookup implements Serializable
 		if (ID == C_ValidCombination_ID)	//	already loaded
 			return true;
 		
-		MAccount account = MAccount.get(Env.getCtx(), ID);
+		final String whereClause = "C_ValidCombination_ID=?";
+		MAccount account = new Query(Env.getCtx(),I_C_ValidCombination.Table_Name,whereClause,null)
+		.setParameters(ID)
+		.firstOnly();
 		
-		if(account == null || account.getC_ValidCombination_ID() != ID)
+		if(account == null)
 			return false;
 		
 		C_ValidCombination_ID = account.getC_ValidCombination_ID();

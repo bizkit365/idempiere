@@ -225,7 +225,7 @@ public abstract class AbstractXLSXExporter
 	 */
 	private String getFormatString(NumberFormat df, boolean isHighlightNegativeNumbers)
 	{
-		StringBuilder format = new StringBuilder();
+		StringBuffer format = new StringBuffer();
 		int integerDigitsMin = df.getMinimumIntegerDigits();
 		int integerDigitsMax = df.getMaximumIntegerDigits();
 		for (int i = 0; i < integerDigitsMax; i++)
@@ -253,7 +253,7 @@ public abstract class AbstractXLSXExporter
 		if (isHighlightNegativeNumbers)
 		{
 			String f = format.toString();
-			format = new StringBuilder(f).append(";[RED]-").append(f);
+			format = new StringBuffer(f).append(";[RED]-").append(f);
 		}
 		//
 		if (log.isLoggable(Level.FINEST))

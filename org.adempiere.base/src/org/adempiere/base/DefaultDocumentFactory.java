@@ -41,7 +41,7 @@ public class DefaultDocumentFactory implements IDocFactory {
 		String tableName = MTable.getTableName(Env.getCtx(), AD_Table_ID);
 		//
 		Doc doc = null;
-		StringBuilder sql = new StringBuilder("SELECT * FROM ")
+		StringBuffer sql = new StringBuffer("SELECT * FROM ")
 			.append(tableName)
 			.append(" WHERE ").append(tableName).append("_ID=? AND Processed='Y'");
 		PreparedStatement pstmt = null;

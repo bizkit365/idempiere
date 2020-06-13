@@ -821,7 +821,7 @@ public class MWorkflow extends X_AD_Workflow
 	 */
 	public String validate()
 	{
-		StringBuilder errors = new StringBuilder();
+		StringBuffer errors = new StringBuffer();
 		//
 		if (getAD_WF_Node_ID() == 0)
 			errors.append(" - No Start Node");

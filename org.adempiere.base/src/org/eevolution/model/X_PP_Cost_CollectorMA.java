@@ -32,7 +32,7 @@ public class X_PP_Cost_CollectorMA extends PO implements I_PP_Cost_CollectorMA, 
 	/**
 	 *
 	 */
-	private static final long serialVersionUID = 20200413L;
+	private static final long serialVersionUID = 20191121L;
 
     /** Standard Constructor */
     public X_PP_Cost_CollectorMA (Properties ctx, int PP_Cost_CollectorMA_ID, String trxName)
@@ -70,7 +70,7 @@ public class X_PP_Cost_CollectorMA extends PO implements I_PP_Cost_CollectorMA, 
 
     public String toString()
     {
-      StringBuilder sb = new StringBuilder ("X_PP_Cost_CollectorMA[")
+      StringBuffer sb = new StringBuffer ("X_PP_Cost_CollectorMA[")
         .append(get_ID()).append("]");
       return sb.toString();
     }

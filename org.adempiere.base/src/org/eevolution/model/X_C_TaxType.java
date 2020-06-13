@@ -31,7 +31,7 @@ public class X_C_TaxType extends PO implements I_C_TaxType, I_Persistent
 	/**
 	 *
 	 */
-	private static final long serialVersionUID = 20200413L;
+	private static final long serialVersionUID = 20191121L;
 
     /** Standard Constructor */
     public X_C_TaxType (Properties ctx, int C_TaxType_ID, String trxName)
@@ -68,8 +68,8 @@ public class X_C_TaxType extends PO implements I_C_TaxType, I_Persistent
 
     public String toString()
     {
-      StringBuilder sb = new StringBuilder ("X_C_TaxType[")
-        .append(get_ID()).append(",Name=").append(getName()).append("]");
+      StringBuffer sb = new StringBuffer ("X_C_TaxType[")
+        .append(get_ID()).append("]");
       return sb.toString();
     }
 

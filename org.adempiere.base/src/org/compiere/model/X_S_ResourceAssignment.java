@@ -33,7 +33,7 @@ public class X_S_ResourceAssignment extends PO implements I_S_ResourceAssignment
 	/**
 	 *
 	 */
-	private static final long serialVersionUID = 20200413L;
+	private static final long serialVersionUID = 20191121L;
 
     /** Standard Constructor */
     public X_S_ResourceAssignment (Properties ctx, int S_ResourceAssignment_ID, String trxName)
@@ -72,8 +72,8 @@ public class X_S_ResourceAssignment extends PO implements I_S_ResourceAssignment
 
     public String toString()
     {
-      StringBuilder sb = new StringBuilder ("X_S_ResourceAssignment[")
-        .append(get_ID()).append(",Name=").append(getName()).append("]");
+      StringBuffer sb = new StringBuffer ("X_S_ResourceAssignment[")
+        .append(get_ID()).append("]");
       return sb.toString();
     }
 

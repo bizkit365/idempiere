@@ -196,7 +196,7 @@ public class Translation implements IApplication
 		String uuidColumn = MTable.getUUIDColumnName(Base_Table);
 		String[] trlColumns = getTrlColumns (Base_Table);
 		//
-		StringBuilder sql = null;
+		StringBuffer sql = null;
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
 		try
@@ -216,7 +216,7 @@ public class Translation implements IApplication
 			root.setAttribute(XML_ATTRIBUTE_TABLE, Base_Table);
 			document.appendChild(root);
 			//
-			sql = new StringBuilder ("SELECT ");
+			sql = new StringBuffer ("SELECT ");
 			if (isBaseLanguage)
 				sql.append("'Y',");							//	1
 			else

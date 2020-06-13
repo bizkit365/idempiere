@@ -15,6 +15,7 @@ package org.adempiere.webui.dashboard;
 
 import java.lang.ref.WeakReference;
 import java.util.List;
+import java.util.Properties;
 
 import org.adempiere.base.Service;
 import org.adempiere.base.event.EventManager;
@@ -74,6 +75,8 @@ public class DPRecentItems extends DashboardPanel implements EventListener<Event
 
 	private int AD_User_ID;
 	
+	private Properties ctx;
+
 	private WeakReference<Desktop> desktop;
 
 	private DesktopCleanup listener;
@@ -82,7 +85,9 @@ public class DPRecentItems extends DashboardPanel implements EventListener<Event
 	{
 		super();
 
-		AD_User_ID = Env.getAD_User_ID(Env.getCtx());
+		ctx = new Properties();
+		ctx.putAll(Env.getCtx());
+		AD_User_ID = Env.getAD_User_ID(ctx);
 		
 		Panel panel = new Panel();
 		this.appendChild(panel);
@@ -104,7 +109,7 @@ public class DPRecentItems extends DashboardPanel implements EventListener<Event
 			btn.setIconSclass("z-icon-Refresh");
 			btn.setSclass("trash-toolbarbutton");
 			recentItemsToolbar.appendChild(btn);
-			btn.setTooltiptext(Util.cleanAmp(Msg.getMsg(Env.getCtx(), "Refresh")));
+			btn.setTooltiptext(Util.cleanAmp(Msg.getMsg(ctx, "Refresh")));
 			btn.addEventListener(Events.ON_CLICK, this);
 		}
 		else
@@ -112,7 +117,7 @@ public class DPRecentItems extends DashboardPanel implements EventListener<Event
 			Image imgr = new Image(ThemeManager.getThemeResource("images/Refresh24.png"));
 			recentItemsToolbar.appendChild(imgr);
 			imgr.setStyle("text-align: right; cursor: pointer; width:24px; height:24px;");
-			imgr.setTooltiptext(Util.cleanAmp(Msg.getMsg(Env.getCtx(), "Refresh")));
+			imgr.setTooltiptext(Util.cleanAmp(Msg.getMsg(ctx, "Refresh")));
 			imgr.addEventListener(Events.ON_CLICK, this);
 		}
 		//
@@ -132,7 +137,7 @@ public class DPRecentItems extends DashboardPanel implements EventListener<Event
 			recentItemsToolbar.appendChild(img);
 			img.setStyle("text-align: right; width:24px; height:24px;");
 			img.setDroppable(DELETE_RECENTITEMS_DROPPABLE);
-			img.setTooltiptext(Util.cleanAmp(Msg.getMsg(Env.getCtx(), "Delete")));
+			img.setTooltiptext(Util.cleanAmp(Msg.getMsg(ctx, "Delete")));
 			img.addEventListener(Events.ON_DROP, this);
 		}
 		//						
@@ -174,7 +179,7 @@ public class DPRecentItems extends DashboardPanel implements EventListener<Event
 	 */
     private void riDBremove(int AD_RecentItem_ID)
 	{
-    	MRecentItem ri = MRecentItem.get(Env.getCtx(), AD_RecentItem_ID);
+    	MRecentItem ri = MRecentItem.get(ctx, AD_RecentItem_ID);
     	ri.deleteEx(true);
 	}
 
@@ -217,8 +222,8 @@ public class DPRecentItems extends DashboardPanel implements EventListener<Event
 			}
 
 			if (AD_RecentItem_ID > 0) {
-				MRecentItem ri = MRecentItem.get(Env.getCtx(), AD_RecentItem_ID);
-				String TableName = MTable.getTableName(Env.getCtx(), ri.getAD_Table_ID());
+				MRecentItem ri = MRecentItem.get(ctx, AD_RecentItem_ID);
+				String TableName = MTable.getTableName(ctx, ri.getAD_Table_ID());
 				MQuery query = MQuery.getEqualQuery(TableName + "_ID", ri.getRecord_ID());
 
 				SessionManager.getAppDesktop().openWindow(ri.getAD_Window_ID(), query, null);
@@ -243,11 +248,11 @@ public class DPRecentItems extends DashboardPanel implements EventListener<Event
 			bxRecentItems.removeChild(comp);
 		}
 
-		int maxri = MSysConfig.getIntValue(MSysConfig.RecentItems_MaxShown, 10, Env.getAD_Client_ID(Env.getCtx()));
+		int maxri = MSysConfig.getIntValue(MSysConfig.RecentItems_MaxShown, 10, Env.getAD_Client_ID(ctx));
 		if (maxri <= 0)
 			return;
 
-		List<MRecentItem> ris = MRecentItem.getFromUser(Env.getCtx(), AD_User_ID);
+		List<MRecentItem> ris = MRecentItem.getFromUser(ctx, AD_User_ID);
 		int riShown = 0;
 		for (MRecentItem ri : ris) {
 			if (ri.getAD_Window_ID() > 0 && MRole.getDefault().getWindowAccess(ri.getAD_Window_ID()) == null)

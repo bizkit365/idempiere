@@ -42,11 +42,15 @@
          version="0.0.0"/>
 
    <includes
-         id="org.eclipse.ecf.filetransfer.ssl.feature"
+         id="org.eclipse.ecf.filetransfer.httpclient4.feature"
          version="0.0.0"/>
 
    <includes
-         id="org.eclipse.ecf.filetransfer.httpclient45.feature"
+         id="org.eclipse.ecf.filetransfer.httpclient4.ssl.feature"
+         version="0.0.0"/>
+
+   <includes
+         id="org.eclipse.ecf.filetransfer.ssl.feature"
          version="0.0.0"/>
 
    <plugin
@@ -78,6 +82,20 @@
          unpack="false"/>
 
    <plugin
+         id="org.eclipse.equinox.ds"
+         download-size="0"
+         install-size="0"
+         version="0.0.0"
+         unpack="false"/>
+
+   <plugin
+         id="org.eclipse.osgi.services"
+         download-size="0"
+         install-size="0"
+         version="0.0.0"
+         unpack="false"/>
+
+   <plugin
          id="org.eclipse.core.variables"
          download-size="0"
          install-size="0"
@@ -86,6 +104,16 @@
 
    <plugin
          id="org.eclipse.core.net"
+         download-size="0"
+         install-size="0"
+         version="0.0.0"
+         unpack="false"/>
+
+   <plugin
+         id="org.eclipse.equinox.launcher"
+         os="linux,macosx,win32"
+         ws="cocoa,gtk,win32"
+         arch="x86,x86_64"
          download-size="0"
          install-size="0"
          version="0.0.0"

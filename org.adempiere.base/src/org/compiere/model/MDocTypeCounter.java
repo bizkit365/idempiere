@@ -82,8 +82,6 @@ public class MDocTypeCounter extends X_C_DocTypeCounter
 		return Counter_C_DocType_ID;
 	}	// getCounterDocType_ID
 
-
-	
 	/**
 	 * 	Get (first) valid Counter document for document type
 	 *	@param ctx context
@@ -99,7 +97,7 @@ public class MDocTypeCounter extends X_C_DocTypeCounter
 		
 		//	Direct Relationship
 		MDocTypeCounter temp = null;
-		String sql = "SELECT * FROM C_DocTypeCounter WHERE IsActive = 'Y' and C_DocType_ID=?";
+		String sql = "SELECT * FROM C_DocTypeCounter WHERE C_DocType_ID=?";
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
 		try

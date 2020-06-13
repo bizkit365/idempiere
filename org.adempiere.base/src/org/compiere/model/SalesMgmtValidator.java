@@ -17,7 +17,11 @@
 
 package org.compiere.model;
 
+import org.compiere.model.MClient;
+import org.compiere.model.MOrderLine;
+import org.compiere.model.ModelValidationEngine;
 import org.compiere.model.ModelValidator;
+import org.compiere.model.PO;
 import org.compiere.util.CLogger;
 
 
@@ -158,7 +162,7 @@ public class SalesMgmtValidator implements ModelValidator
 	 */
 	public String toString ()
 	{
-		StringBuilder sb = new StringBuilder ("SalesMgmtValidator");
+		StringBuffer sb = new StringBuffer ("SalesMgmtValidator");
 		return sb.toString ();
 	}	//	toString
 	

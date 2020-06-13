@@ -32,7 +32,7 @@ public class X_C_RevenueRecognition_Plan extends PO implements I_C_RevenueRecogn
 	/**
 	 *
 	 */
-	private static final long serialVersionUID = 20200413L;
+	private static final long serialVersionUID = 20191121L;
 
     /** Standard Constructor */
     public X_C_RevenueRecognition_Plan (Properties ctx, int C_RevenueRecognition_Plan_ID, String trxName)
@@ -75,7 +75,7 @@ public class X_C_RevenueRecognition_Plan extends PO implements I_C_RevenueRecogn
 
     public String toString()
     {
-      StringBuilder sb = new StringBuilder ("X_C_RevenueRecognition_Plan[")
+      StringBuffer sb = new StringBuffer ("X_C_RevenueRecognition_Plan[")
         .append(get_ID()).append("]");
       return sb.toString();
     }

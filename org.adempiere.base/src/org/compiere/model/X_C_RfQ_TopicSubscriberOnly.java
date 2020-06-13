@@ -30,7 +30,7 @@ public class X_C_RfQ_TopicSubscriberOnly extends PO implements I_C_RfQ_TopicSubs
 	/**
 	 *
 	 */
-	private static final long serialVersionUID = 20200413L;
+	private static final long serialVersionUID = 20191121L;
 
     /** Standard Constructor */
     public X_C_RfQ_TopicSubscriberOnly (Properties ctx, int C_RfQ_TopicSubscriberOnly_ID, String trxName)
@@ -66,7 +66,7 @@ public class X_C_RfQ_TopicSubscriberOnly extends PO implements I_C_RfQ_TopicSubs
 
     public String toString()
     {
-      StringBuilder sb = new StringBuilder ("X_C_RfQ_TopicSubscriberOnly[")
+      StringBuffer sb = new StringBuffer ("X_C_RfQ_TopicSubscriberOnly[")
         .append(get_ID()).append("]");
       return sb.toString();
     }

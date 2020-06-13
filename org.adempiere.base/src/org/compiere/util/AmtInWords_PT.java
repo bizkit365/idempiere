@@ -269,7 +269,7 @@ public class AmtInWords_PT implements AmtInWords
 		if (amount == null)
 			return amount;
 		//
-		StringBuilder sb = new StringBuilder ();
+		StringBuffer sb = new StringBuffer ();
     	int pos = amount.lastIndexOf ('.');    // Old
 	//	int pos = amount.lastIndexOf (',');  		
     	int pos2 = amount.lastIndexOf (',');   // Old		

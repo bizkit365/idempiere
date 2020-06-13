@@ -33,7 +33,7 @@ public class X_GL_Fund extends PO implements I_GL_Fund, I_Persistent
 	/**
 	 *
 	 */
-	private static final long serialVersionUID = 20200413L;
+	private static final long serialVersionUID = 20191121L;
 
     /** Standard Constructor */
     public X_GL_Fund (Properties ctx, int GL_Fund_ID, String trxName)
@@ -71,8 +71,8 @@ public class X_GL_Fund extends PO implements I_GL_Fund, I_Persistent
 
     public String toString()
     {
-      StringBuilder sb = new StringBuilder ("X_GL_Fund[")
-        .append(get_ID()).append(",Name=").append(getName()).append("]");
+      StringBuffer sb = new StringBuffer ("X_GL_Fund[")
+        .append(get_ID()).append("]");
       return sb.toString();
     }
 

@@ -32,7 +32,7 @@ public class X_GL_JournalGeneratorLine extends PO implements I_GL_JournalGenerat
 	/**
 	 *
 	 */
-	private static final long serialVersionUID = 20200413L;
+	private static final long serialVersionUID = 20191121L;
 
     /** Standard Constructor */
     public X_GL_JournalGeneratorLine (Properties ctx, int GL_JournalGeneratorLine_ID, String trxName)
@@ -74,7 +74,7 @@ public class X_GL_JournalGeneratorLine extends PO implements I_GL_JournalGenerat
 
     public String toString()
     {
-      StringBuilder sb = new StringBuilder ("X_GL_JournalGeneratorLine[")
+      StringBuffer sb = new StringBuffer ("X_GL_JournalGeneratorLine[")
         .append(get_ID()).append("]");
       return sb.toString();
     }

@@ -87,7 +87,6 @@ import org.compiere.util.Env;
 import org.compiere.util.KeyNamePair;
 import org.compiere.util.Msg;
 import org.compiere.util.Trx;
-import org.compiere.util.Util;
 import org.compiere.util.ValueNamePair;
 import org.zkoss.zk.au.out.AuEcho;
 import org.zkoss.zk.ui.Page;
@@ -222,26 +221,17 @@ public abstract class InfoPanel extends Window implements EventListener<Event>, 
 				lookup, 0);
 	}
 	
-	protected InfoPanel (int WindowNo,
-			String tableName, String keyColumn,boolean multipleSelection,
-			 String whereClause, boolean lookup, int ADInfoWindowID)
-	{
-		this(WindowNo, tableName, keyColumn, multipleSelection, 
-				whereClause, lookup, ADInfoWindowID, null);
-	}
-	
 	/**************************************************
      *  Detail Constructor
      * @param WindowNo  WindowNo
      * @param tableName tableName
      * @param keyColumn keyColumn
      * @param whereClause   whereClause
-     * @param queryValue
 	 */
 	protected InfoPanel (int WindowNo,
 		String tableName, String keyColumn,boolean multipleSelection,
-		 String whereClause, boolean lookup, int ADInfoWindowID, String queryValue)
-	{				
+		 String whereClause, boolean lookup, int ADInfoWindowID)
+	{		
 		if (WindowNo <= 0) {
 			p_WindowNo = SessionManager.getAppDesktop().registerWindow(this);
 		} else {
@@ -252,12 +242,6 @@ public abstract class InfoPanel extends Window implements EventListener<Event>, 
 		p_tableName = tableName;
 		this.m_infoWindowID = ADInfoWindowID;
 		p_keyColumn = keyColumn;
-		
-		this.queryValue = queryValue;
-		if (queryValue != null && queryValue.trim().length() > 0)
-		{
-			parseQueryValue();
-		}
 		
         p_multipleSelection = multipleSelection;
         m_lookup = lookup;
@@ -291,40 +275,6 @@ public abstract class InfoPanel extends Window implements EventListener<Event>, 
 		
 	}	//	InfoPanel
 
-	protected void parseQueryValue() {
-		if (Util.isEmpty(queryValue, true))
-			return;
-		
-		int start = queryValue.indexOf("?autocomplete={");
-		if (start > 0 && queryValue.endsWith("}")) {
-			this.isAutoComplete = true;
-			this.numPagePreLoad = 1;
-			String optionInput = queryValue.substring(start+"?autocomplete={".length(), queryValue.length()-1);
-			queryValue = queryValue.substring(0, start);
-			String[] options = optionInput.split("[,]");
-			for(String option : options) {
-				String[] pair = option.trim().split("[:]");
-				if (pair.length != 2)
-					continue;
-				if (pair[0].equalsIgnoreCase("timeout")) {
-					try {
-						int t = Integer.parseInt(pair[1]);
-						if (t > 0)
-							this.queryTimeout = t;
-					} catch (Exception e) {}
-				} else if (pair[0].equalsIgnoreCase("pagesize")) {
-					try {
-						int t = Integer.parseInt(pair[1]);
-						if (t > 0)
-							this.pageSize = t;
-					} catch (Exception e) {}
-				} else if (pair[0].equalsIgnoreCase("searchcolumn")) {
-					this.autoCompleteSearchColumn = pair[1];
-				}
-			}
-		}
-	}
-	
 	private void init()
 	{
 		if (isLookup())
@@ -354,6 +304,7 @@ public abstract class InfoPanel extends Window implements EventListener<Event>, 
 			setBorder("none");
 			ZKUpdateUtil.setWidth(this, "100%");
 			ZKUpdateUtil.setHeight(this, "100%");
+			setStyle("position: absolute");
 		}
 
 		confirmPanel = new ConfirmPanel(true, true, true, true, true, true);  // Elaine 2008/12/16 
@@ -459,15 +410,6 @@ public abstract class InfoPanel extends Window implements EventListener<Event>, 
 	 * IDEMPIERE-1979
 	 */
 	protected boolean isQueryByUser = false;
-	
-	protected boolean isAutoComplete = false;
-	
-	protected int queryTimeout = 0;
-	
-	protected String autoCompleteSearchColumn = null;
-	
-	protected String queryValue;
-	
 	/**
 	 * save where clause of prev requery
 	 */
@@ -951,8 +893,6 @@ public abstract class InfoPanel extends Window implements EventListener<Event>, 
 			trx  = Trx.get(trxName, true);
 			trx.setDisplayName(getClass().getName()+"_readLine");
 			m_pstmt = DB.prepareStatement(dataSql, trxName);
-			if (queryTimeout > 0)
-				m_pstmt.setQueryTimeout(queryTimeout);
 			setParameters (m_pstmt, false);	//	no count
 			if (log.isLoggable(Level.FINE))
 				log.fine("Start query - " + (System.currentTimeMillis()-startTime) + "ms");

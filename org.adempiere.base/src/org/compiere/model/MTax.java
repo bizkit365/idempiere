@@ -229,7 +229,7 @@ public class MTax extends X_C_Tax
 	
 	public String toString()
 	{
-		StringBuilder sb = new StringBuilder("MTax[")
+		StringBuffer sb = new StringBuffer("MTax[")
 			.append(get_ID())
 			.append(", Name = ").append(getName())
 			.append(", SO/PO=").append(getSOPOType())

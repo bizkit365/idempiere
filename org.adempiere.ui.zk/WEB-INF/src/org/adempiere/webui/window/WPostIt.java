@@ -108,7 +108,7 @@ public class WPostIt extends Window implements EventListener<Event>{
 		tabPanels.appendChild(tabPanel);
 		textBox = new Textbox(note);
 		textBox.setCols(80);
-		textBox.setMultiline(true);
+		textBox.setRows(30);
 		textBox.setEnabled(editable);
 		if (ClientInfo.minWidth(730))
 			textBox.setWidth("700px");

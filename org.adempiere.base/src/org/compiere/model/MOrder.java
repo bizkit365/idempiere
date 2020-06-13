@@ -578,7 +578,7 @@ public class MOrder extends X_C_Order implements DocAction
 	 */
 	public String toString ()
 	{
-		StringBuilder sb = new StringBuilder ("MOrder[")
+		StringBuffer sb = new StringBuffer ("MOrder[")
 			.append(get_ID()).append("-").append(getDocumentNo())
 			.append(",IsSOTrx=").append(isSOTrx())
 			.append(",C_DocType_ID=").append(getC_DocType_ID())
@@ -1289,7 +1289,7 @@ public class MOrder extends X_C_Order implements DocAction
 		}
 				
 		// Bug 1564431
-		if (MOrder.DELIVERYRULE_CompleteOrder.equals(getDeliveryRule()) )
+		if (getDeliveryRule() != null && getDeliveryRule().equals(MOrder.DELIVERYRULE_CompleteOrder)) 
 		{
 			for (int i = 0; i < lines.length; i++) 
 			{
@@ -1298,11 +1298,6 @@ public class MOrder extends X_C_Order implements DocAction
 				if (product != null && product.isExcludeAutoDelivery())
 				{
 					m_processMsg = "@M_Product_ID@ "+product.getValue()+" @IsExcludeAutoDelivery@";
-					return DocAction.STATUS_Invalid;
-				}
-				if (line.getDatePromised() != null && !line.getDatePromised().equals(getDatePromised()))
-				{
-					m_processMsg = "@Line@ " + line.getLine() + " - @Invalid@ @DatePromised@";
 					return DocAction.STATUS_Invalid;
 				}
 			}
@@ -2331,7 +2326,7 @@ public class MOrder extends X_C_Order implements DocAction
 			return null;
 		//	Business Partner needs to be linked to Org
 		MBPartner bp = new MBPartner (getCtx(), getC_BPartner_ID(), get_TrxName());
-		int counterAD_Org_ID = bp.getAD_OrgBP_ID(); 
+		int counterAD_Org_ID = bp.getAD_OrgBP_ID_Int(); 
 		if (counterAD_Org_ID == 0)
 			return null;
 		
@@ -2709,10 +2704,32 @@ public class MOrder extends X_C_Order implements DocAction
 		m_processMsg = ModelValidationEngine.get().fireDocValidate(this,ModelValidator.TIMING_BEFORE_REACTIVATE);
 		if (m_processMsg != null)
 			return false;	
+				
+		
 		
 		MDocType dt = MDocType.get(getCtx(), getC_DocType_ID());
 		String DocSubTypeSO = dt.getDocSubTypeSO();
 		
+		//	Replace Prepay with POS to revert all doc
+		if (MDocType.DOCSUBTYPESO_PrepayOrder.equals (DocSubTypeSO))
+		{
+			MDocType newDT = null;
+			MDocType[] dts = MDocType.getOfClient (getCtx());
+			for (int i = 0; i < dts.length; i++)
+			{
+				MDocType type = dts[i];
+				if (MDocType.DOCSUBTYPESO_PrepayOrder.equals(type.getDocSubTypeSO()))
+				{
+					if (type.isDefault() || newDT == null)
+						newDT = type;
+				}
+			}
+			if (newDT == null)
+				return false;
+			else
+				setC_DocType_ID (newDT.getC_DocType_ID());
+		}
+
 		//	PO - just re-open
 		if (!isSOTrx()) {
 			if (log.isLoggable(Level.INFO)) log.info("Existing documents not modified - " + dt);

@@ -26,12 +26,10 @@
 package org.compiere.process;
 
 import java.sql.Connection;
-import java.sql.DatabaseMetaData;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.logging.Level;
 
-import org.compiere.db.AdempiereDatabase;
 import org.compiere.model.MColumn;
 import org.compiere.model.MTable;
 import org.compiere.util.AdempiereUserError;
@@ -310,7 +308,7 @@ public class ColumnEncryption extends SvrProcess {
 		StringBuilder selectSql = new StringBuilder();
 		selectSql.append("SELECT ").append(idColumnName).append(",").append(columnName).append(",AD_Client_ID");
 		selectSql.append(" FROM ").append(tableName);
-		selectSql.append(" ORDER BY 1");
+		selectSql.append(" ORDER BY ").append(idColumnName);
 
 		StringBuilder updateSql = new StringBuilder();
 		updateSql.append("UPDATE ").append(tableName);
@@ -466,29 +464,11 @@ public class ColumnEncryption extends SvrProcess {
 		// Select SQL
 		String selectSql = "SELECT FieldLength FROM AD_Column WHERE AD_Column_ID=?";
 
-		String dataType = "NVARCHAR2";
-		if (DB.isOracle()) {
-			Connection conn = Trx.get(get_TrxName(), false).getConnection();
-			AdempiereDatabase db = DB.getDatabase();
-			DatabaseMetaData md = conn.getMetaData();
-			String catalog = db.getCatalog();
-			String schema = db.getSchema();
-			ResultSet rs = null;
-			try {
-				rs = md.getColumns(catalog, schema, tableName.toUpperCase(), columnName.toUpperCase());
-				if (rs.next()) {
-					dataType = rs.getString ("TYPE_NAME");
-				}
-			} finally {
-				DB.close(rs);
-			}
-		}
-		
 		// Alter SQL
 		StringBuilder alterSql = new StringBuilder();
 		alterSql.append("ALTER TABLE ").append(tableName);
 		alterSql.append(" MODIFY ").append(columnName);
-		alterSql.append(" ").append(dataType).append("(");
+		alterSql.append(" NVARCHAR2(");
 		alterSql.append(length).append(") ");
 
 		// Update SQL

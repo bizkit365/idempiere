@@ -3,6 +3,7 @@ package org.compiere.model;
 import java.sql.ResultSet;
 import java.util.Properties;
 
+import org.compiere.model.MRefList;
 import org.compiere.util.DB;
 /** Generated Model for A_Asset_Use
  ** @version $Id: X_A_Asset.java,v 1.88 2004/08/27 21:26:37 jjanke Exp $ */
@@ -47,7 +48,7 @@ protected boolean afterSave (boolean newRecord,boolean success)
 	p_A_Asset_ID = getA_Asset_ID();
 	
 	
-	String sql = "SELECT SUM(USEUNITS) FROM A_Asset_use WHERE A_Asset_ID=? and usedate <= getDate()";
+	String sql = "SELECT SUM(USEUNITS) FROM A_Asset_use WHERE A_Asset_ID=? and usedate <= SYSDATE";
 	total_unitsused = DB.getSQLValueEx(null, sql, getA_Asset_ID());
 	
 	MAsset asset = MAsset.get(getCtx(), p_A_Asset_ID, null);

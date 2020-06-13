@@ -157,7 +157,7 @@ public class CLogFormatter extends Formatter
 		int index = className.lastIndexOf('.');
 		if (index != -1)
 			className = className.substring(index+1);
-		StringBuilder sb = new StringBuilder()
+    	StringBuffer sb = new StringBuffer()
 			.append("*** ")
 			.append(new Timestamp(System.currentTimeMillis()))
 			.append(" idempiere Log (").append(className)

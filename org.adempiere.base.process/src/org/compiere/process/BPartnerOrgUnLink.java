@@ -20,8 +20,6 @@ import java.math.BigDecimal;
 import java.util.logging.Level;
 
 import org.compiere.model.MBPartner;
-import org.compiere.util.AdempiereUserError;
-import org.compiere.util.Msg;
 
 /**
  *	UnLink Business Partner from Organization 
@@ -64,11 +62,11 @@ public class BPartnerOrgUnLink extends SvrProcess
 			throw new IllegalArgumentException ("No Business Partner ID");
 		MBPartner bp = new MBPartner (getCtx(), p_C_BPartner_ID, get_TrxName());
 		if (bp.get_ID() == 0)
-			throw new AdempiereUserError (Msg.getMsg(getCtx(), "BPartnerNotFound") + " - C_BPartner_ID=" + p_C_BPartner_ID);
+			throw new IllegalArgumentException ("Business Partner not found - C_BPartner_ID=" + p_C_BPartner_ID);
 		//
-		if (bp.getAD_OrgBP_ID() == 0)
+		if (bp.getAD_OrgBP_ID_Int() == 0)
 			throw new IllegalArgumentException ("Business Partner not linked to an Organization");
-		bp.setAD_OrgBP_ID(0);
+		bp.setAD_OrgBP_ID(null);
 		if (!bp.save())
 			throw new IllegalArgumentException ("Business Partner not changed");
 		

@@ -32,7 +32,7 @@ public class X_T_Aging extends PO implements I_T_Aging, I_Persistent
 	/**
 	 *
 	 */
-	private static final long serialVersionUID = 20200413L;
+	private static final long serialVersionUID = 20191121L;
 
     /** Standard Constructor */
     public X_T_Aging (Properties ctx, int T_Aging_ID, String trxName)
@@ -96,7 +96,7 @@ public class X_T_Aging extends PO implements I_T_Aging, I_Persistent
 
     public String toString()
     {
-      StringBuilder sb = new StringBuilder ("X_T_Aging[")
+      StringBuffer sb = new StringBuffer ("X_T_Aging[")
         .append(get_ID()).append("]");
       return sb.toString();
     }

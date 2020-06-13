@@ -688,7 +688,7 @@ public class Util
 		}
 		String normStr = java.text.Normalizer.normalize(s, java.text.Normalizer.Form.NFD);
 		
-		StringBuilder sb = new StringBuilder();
+		StringBuffer sb = new StringBuffer();
 		for (int i = 0; i < normStr.length(); i++) {
 			char ch = normStr.charAt(i);
 			if (ch < 255)

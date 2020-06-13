@@ -32,7 +32,7 @@ public class X_T_BankRegister extends PO implements I_T_BankRegister, I_Persiste
 	/**
 	 *
 	 */
-	private static final long serialVersionUID = 20200413L;
+	private static final long serialVersionUID = 20191121L;
 
     /** Standard Constructor */
     public X_T_BankRegister (Properties ctx, int T_BankRegister_ID, String trxName)
@@ -67,7 +67,7 @@ public class X_T_BankRegister extends PO implements I_T_BankRegister, I_Persiste
 
     public String toString()
     {
-      StringBuilder sb = new StringBuilder ("X_T_BankRegister[")
+      StringBuffer sb = new StringBuffer ("X_T_BankRegister[")
         .append(get_ID()).append("]");
       return sb.toString();
     }
