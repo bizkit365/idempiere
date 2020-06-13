@@ -305,7 +305,7 @@ public class InvoicePrint extends SvrProcess
 				if (printed)
 				{
 					StringBuffer sb = new StringBuffer ("UPDATE C_Invoice "
-						+ "SET DatePrinted=SysDate, IsPrinted='Y' WHERE C_Invoice_ID=")
+						+ "SET DatePrinted=getDate(), IsPrinted='Y' WHERE C_Invoice_ID=")
 						.append (C_Invoice_ID);
 					DB.executeUpdateEx(sb.toString(), get_TrxName());
 				}
@@ -428,7 +428,8 @@ public class InvoicePrint extends SvrProcess
 		}
 		String orgWhere = MRole.getDefault(getCtx(), false).getOrgWhere(MRole.SQL_RO);
 		if (!Util.isEmpty(orgWhere, true)) {
-			sql.append(" AND i.");
+			orgWhere = orgWhere.replaceAll("AD_Org_ID", "i.AD_Org_ID");
+			sql.append(" AND ");
 			sql.append(orgWhere);
 		}
 		sql.append(" ORDER BY i.C_Invoice_ID, pf.AD_Org_ID DESC");	//	more than 1 PF record

@@ -425,8 +425,8 @@ public final class MRole extends X_AD_Role
 			return "-";
 		
 		String roleClientOrgUser = getAD_Role_ID() + ","
-			+ getAD_Client_ID() + "," + getAD_Org_ID() + ",'Y', SysDate," 
-			+ getUpdatedBy() + ", SysDate," + getUpdatedBy() 
+			+ getAD_Client_ID() + "," + getAD_Org_ID() + ",'Y', getDate()," 
+			+ getUpdatedBy() + ", getDate()," + getUpdatedBy() 
 			+ ",'Y' ";	//	IsReadWrite
 		
 		String sqlWindow = "INSERT INTO AD_Window_Access "
@@ -474,8 +474,8 @@ public final class MRole extends X_AD_Role
 			+ "(AD_Client_ID,AD_Org_ID,IsActive,Created,CreatedBy,Updated,UpdatedBy,"
 			+ "C_DocType_ID , AD_Ref_List_ID, AD_Role_ID) " 
 			+ "(SELECT "
-			+ getAD_Client_ID() + ",0,'Y', SysDate," 
-			+ getUpdatedBy() + ", SysDate," + getUpdatedBy() 
+			+ getAD_Client_ID() + ",0,'Y', getDate()," 
+			+ getUpdatedBy() + ", getDate()," + getUpdatedBy() 
 			+ ", doctype.C_DocType_ID, action.AD_Ref_List_ID, rol.AD_Role_ID " 
 			+ "FROM AD_Client client " 
 			+ "INNER JOIN C_DocType doctype ON (doctype.AD_Client_ID=client.AD_Client_ID) "
@@ -491,8 +491,8 @@ public final class MRole extends X_AD_Role
 				+ "(AD_InfoWindow_ID, AD_Role_ID,"
 				+ " AD_Client_ID,AD_Org_ID,IsActive,Created,CreatedBy,Updated,UpdatedBy) "
 				+ "SELECT i.AD_InfoWindow_ID," + getAD_Role_ID() + ","
-				+ getAD_Client_ID() + "," + getAD_Org_ID() + ",'Y',SysDate," 
-				+ getUpdatedBy() + ", SysDate," + getUpdatedBy()
+				+ getAD_Client_ID() + "," + getAD_Org_ID() + ",'Y',getDate()," 
+				+ getUpdatedBy() + ", getDate()," + getUpdatedBy()
 				+ " FROM AD_InfoWindow i LEFT JOIN AD_InfoWindow_Access ia ON "
 				+ "(ia.AD_Role_ID=" + getAD_Role_ID()
 				+ " AND i.AD_InfoWindow_ID = ia.AD_InfoWindow_ID) "
@@ -743,6 +743,9 @@ public final class MRole extends X_AD_Role
 	 */
 	private void loadOrgAccessUser(ArrayList<OrgAccess> list)
 	{
+		if (getAD_User_ID() == -1) {
+			log.severe("Trying to load Org Access from User but user has not been set");
+		}
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
 		String sql = "SELECT * FROM AD_User_OrgAccess "
@@ -1134,17 +1137,22 @@ public final class MRole extends X_AD_Role
 		//
 		StringBuilder sb = new StringBuilder();
 		Iterator<String> it = set.iterator();
-		boolean oneOnly = true;
+		final int MAX_ORACLE_ELEMENTS_IN_ORACLE = 1000;
+		int idx = 0;
 		while (it.hasNext())
 		{
+			idx++;
 			if (sb.length() > 0)
 			{
-				sb.append(",");
-				oneOnly = false;
+				if (DB.isOracle() && (idx-1) % MAX_ORACLE_ELEMENTS_IN_ORACLE == 0) { // prevent ORA-01795
+					sb.append(") OR AD_Org_ID IN (");
+				} else {
+					sb.append(",");
+				}
 			}
 			sb.append(it.next());
 		}
-		if (oneOnly)
+		if (sb.indexOf(",") < 0) // only one org
 		{
 			if (sb.length() > 0)
 				return "AD_Org_ID=" + sb.toString();
@@ -1154,8 +1162,8 @@ public final class MRole extends X_AD_Role
 				return "AD_Org_ID=-1";	//	No Access Record
 			}
 		}		
-		return "AD_Org_ID IN(" + sb.toString() + ")";
-	}	//	getOrgWhereValue
+		return "(AD_Org_ID IN (" + sb.toString() + "))";
+	}	//	getOrgWhere
 	
 	/**
 	 * 	Access to Org
@@ -1994,9 +2002,10 @@ public final class MRole extends X_AD_Role
 			if (!isAccessAllOrgs())
 			{
 				retSQL.append(" AND ");
+				String orgWhere = getOrgWhere(rw);
 				if (fullyQualified)
-					retSQL.append(tableName).append(".");
-				retSQL.append(getOrgWhere(rw));
+					orgWhere = orgWhere.replaceAll("AD_Org_ID", tableName + ".AD_Org_ID");
+				retSQL.append(orgWhere);
 			}
 		} else {
 			retSQL.append("1=1");
@@ -2395,8 +2404,8 @@ public final class MRole extends X_AD_Role
 	{
 		loadRecordAccess(false);
 		//
-		StringBuffer sbInclude = new StringBuffer();
-		StringBuffer sbExclude = new StringBuffer();
+		StringBuilder sbInclude = new StringBuilder();
+		StringBuilder sbExclude = new StringBuilder();
 		//	Role Access
 		for (int i = 0; i < m_recordAccess.length; i++)
 		{
@@ -2559,7 +2568,7 @@ public final class MRole extends X_AD_Role
 		final ArrayList<String> validOptions = new ArrayList<String>();
 		final List<Object> optionParams = new ArrayList<Object>();
 		//
-		final StringBuffer sql_values = new StringBuffer();
+		final StringBuilder sql_values = new StringBuilder();
 		for (int i = 0; i < maxIndex; i++) {
 			if (sql_values.length() > 0)
 				sql_values.append(",");
@@ -2784,6 +2793,7 @@ public final class MRole extends X_AD_Role
 		final int AD_User_ID = getAD_User_ID();
 		if (AD_User_ID < 0)
 		{
+			log.severe("Trying to load Child Roles but user has not been set");
 			//throw new IllegalStateException("AD_User_ID is not set");
 			return ;
 		}
@@ -2819,6 +2829,7 @@ public final class MRole extends X_AD_Role
 		final int AD_User_ID = getAD_User_ID();
 		if (AD_User_ID < 0)
 		{
+			log.severe("Trying to load Substituted Roles but user has not been set");
 			//throw new IllegalStateException("AD_User_ID is not set");
 			return;
 		}
@@ -2827,8 +2838,8 @@ public final class MRole extends X_AD_Role
 		+" SELECT 1 FROM AD_User_Roles ur"
 		+" INNER JOIN AD_User_Substitute us ON (us.AD_User_ID=ur.AD_User_ID)"
 		+" WHERE ur.AD_Role_ID=AD_Role.AD_Role_ID AND ur.IsActive='Y' AND us.IsActive='Y'"
-		+" AND (us.ValidFrom IS NULL OR us.ValidFrom <= SYSDATE)"
-		+" AND (us.ValidTo IS NULL OR us.ValidTo >= SYSDATE)"
+		+" AND (us.ValidFrom IS NULL OR us.ValidFrom <= getDate())"
+		+" AND (us.ValidTo IS NULL OR us.ValidTo >= getDate())"
 		+" AND us.Substitute_ID=?)";
 
 		List<MRole> list = new Query(getCtx(), Table_Name, whereClause, get_TrxName())
