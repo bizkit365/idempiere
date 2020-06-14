@@ -460,7 +460,6 @@ public class NumberBox extends Div
 	public void setEnabled(boolean enabled)
 	{
 	     decimalBox.setReadonly(!enabled);
-	     decimalBox.setDisabled(!enabled);
 	     btn.setEnabled(enabled);
 	     if (enabled)
 	     {
