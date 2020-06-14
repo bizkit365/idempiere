@@ -278,8 +278,6 @@ public class WPaymentEditor extends WEditor implements ListDataListener, Context
 		        super.fireValueChange(changeEvent);
 		        oldValue = newValue;
 	        }
-	        if (newValue != null)
-	        	focusNext();
     	}
     	else if (Events.ON_BLUR.equalsIgnoreCase(event.getName()))
     	{

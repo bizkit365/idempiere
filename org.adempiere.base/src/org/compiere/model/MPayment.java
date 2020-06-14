@@ -726,20 +726,10 @@ public class MPayment extends X_C_Payment
 		if (newRecord 
 			|| is_ValueChanged("C_Charge_ID") || is_ValueChanged("C_Invoice_ID")
 			|| is_ValueChanged("C_Order_ID") || is_ValueChanged("C_Project_ID"))
-		{
-			if (getReversal_ID() > 0)
-			{
-				setIsPrepayment(getReversal().isPrepayment());
-			}
-			else
-			{
-				setIsPrepayment (getC_Charge_ID() == 0 
-					&& getC_BPartner_ID() != 0
-					&& (getC_Order_ID() != 0 
-						|| (getC_Project_ID() != 0 && getC_Invoice_ID() == 0)));
-			}
-		}
-		
+			setIsPrepayment (getC_Charge_ID() == 0 
+				&& getC_BPartner_ID() != 0
+				&& (getC_Order_ID() != 0 
+					|| (getC_Project_ID() != 0 && getC_Invoice_ID() == 0)));
 		if (isPrepayment())
 		{
 			if (newRecord 

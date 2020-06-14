@@ -124,7 +124,6 @@ import org.zkoss.zul.Columns;
 import org.zkoss.zul.Div;
 import org.zkoss.zul.Menuitem;
 import org.zkoss.zul.Menupopup;
-import org.zkoss.zul.RowRenderer;
 import org.zkoss.zul.Window.Mode;
 
 /**
@@ -2016,20 +2015,16 @@ public abstract class AbstractADWindowContent extends AbstractUIPart implements 
             return;
 
         clearTitleRelatedContext();
-        
-        // The record was not changed locally
-        if (adTabbox.getDirtyADTabpanel() == null) {
-        	doOnFind();
-        } else {
-            onSave(false, false, new Callback<Boolean>() {
-    			@Override
-    			public void onCallback(Boolean result) {
-    				if (result) {
-    					doOnFind();
-    				}
-    			}
-    		});        	
-        }
+
+        onSave(false, false, new Callback<Boolean>() {
+
+			@Override
+			public void onCallback(Boolean result) {
+				if (result) {
+					doOnFind();
+				}
+			}
+		});
     }
 
 	private void doOnFind() {
@@ -2157,22 +2152,11 @@ public abstract class AbstractADWindowContent extends AbstractUIPart implements 
 	        }
 
     	}
-    	if (dirtyTabpanel != null) {
+    	if (dirtyTabpanel != null)
     		focusToTabpanel(dirtyTabpanel);
-    		//ensure row indicator is not lost
-    		if (dirtyTabpanel.getGridView() != null && 
-    				dirtyTabpanel.getGridView().getListbox() != null &&
-    				dirtyTabpanel.getGridView().getListbox().getRowRenderer() != null) {
-        		RowRenderer<Object[]> renderer = dirtyTabpanel.getGridView().getListbox().getRowRenderer();
-        		GridTabRowRenderer gtr = (GridTabRowRenderer)renderer;
-        		org.zkoss.zul.Row row = gtr.getCurrentRow();
-        		if (row != null)
-        			gtr.setCurrentRow(row);    			
-    		}
-    	}
     	else
     		focusToActivePanel();
-
+    	
     	updateToolbar();
     	
     	if (postCallback != null)
@@ -2387,14 +2371,6 @@ public abstract class AbstractADWindowContent extends AbstractUIPart implements 
 		//other error will be catch in the dataStatusChanged event
 	}
 
-	private void showLastWarning() {
-		String msg = CLogger.retrieveWarningString(null);
-		if (msg != null)
-		{
-			statusBar.setStatusLine(Msg.getMsg(Env.getCtx(), msg), true);
-		}
-	}
-
 	/**
 	 * @see ToolbarListener#onSaveCreate()
 	 */
@@ -2474,11 +2450,9 @@ public abstract class AbstractADWindowContent extends AbstractUIPart implements 
 				if (result)
 				{
 		        	//error will be catch in the dataStatusChanged event
-		            boolean success = adTabbox.getSelectedGridTab().dataDelete();
+		            adTabbox.getSelectedGridTab().dataDelete();
 		            adTabbox.getSelectedGridTab().dataRefreshAll(true, true);
 		    		adTabbox.getSelectedGridTab().refreshParentTabs();
-		    		if (!success)
-		    			showLastWarning();
 
 		            adTabbox.getSelectedTabpanel().dynamicDisplay(0);
 		            focusToActivePanel();

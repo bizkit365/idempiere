@@ -192,11 +192,9 @@ public class AtmosphereServerPush implements ServerPush {
 			}
 	        if (!ok) {
 	        	for(int i = 0; i < 3 && !ok; i++) {
-	        		for (int ii = 0; ii < 10 && schedules.size() > 0; ii++) {
-                        try {
-                            Thread.sleep(50);
-                        } catch (InterruptedException e1) {}
-                    }
+		        	try {
+						Thread.sleep(500);
+					} catch (InterruptedException e1) {}
 		        	if (schedules.size() > 0) {
 			        	try {
 				        	ok = commitResponse();
@@ -244,16 +242,13 @@ public class AtmosphereServerPush implements ServerPush {
             return;
         }
 
-        this.resource.set(null);
-        synchronized (schedules) {
-        	schedules.clear();
+        if (log.isDebugEnabled())
+        	log.debug("Stopping server push for " + desktop);
+        Clients.response("jawwa.atmosphere.serverpush", new AuScript(null, "jawwa.atmosphere.stopServerPush('" + desktop.getId() + "');"));
+        try {
+			commitResponse();
+		} catch (IOException e) {
 		}
-        
-        if (Executions.getCurrent() != null) {
-	        if (log.isDebugEnabled())
-	        	log.debug("Stopping server push for " + desktop);
-	        Clients.response("jawwa.atmosphere.serverpush", new AuScript(null, "jawwa.atmosphere.stopServerPush('" + desktop.getId() + "');"));        
-        }
     }
 
     public void onRequest(AtmosphereResource resource) {

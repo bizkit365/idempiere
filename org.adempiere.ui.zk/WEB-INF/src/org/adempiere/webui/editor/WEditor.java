@@ -26,7 +26,6 @@ import java.util.Properties;
 import org.adempiere.webui.AdempiereWebUI;
 import org.adempiere.webui.ClientInfo;
 import org.adempiere.webui.LayoutUtils;
-import org.adempiere.webui.adwindow.IFieldEditorContainer;
 import org.adempiere.webui.component.Bandbox;
 import org.adempiere.webui.component.Button;
 import org.adempiere.webui.component.Datebox;
@@ -812,18 +811,6 @@ public abstract class WEditor implements EventListener<Event>, PropertyChangeLis
 	 */
 	public Component getDisplayComponent() {
 		return null;
-	}
-
-	protected void focusNext() {
-		Component comp = getComponent();
-		Component parent = comp.getParent();
-		while (parent != null) {
-			if (parent instanceof IFieldEditorContainer) {
-				((IFieldEditorContainer) parent).focusToNextEditor(this);
-				break;
-			}
-			parent = parent.getParent();
-		}
 	}
 
 	protected Evaluatee getStyleEvaluatee() {

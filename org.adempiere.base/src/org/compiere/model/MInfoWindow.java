@@ -43,7 +43,7 @@ public class MInfoWindow extends X_AD_InfoWindow
 	/**
 	 * 
 	 */
-	private static final long serialVersionUID = -1619434756919905441L;
+	private static final long serialVersionUID = -3627504150648422756L;
 
 	/**
 	 * 	Standard Constructor
@@ -455,19 +455,5 @@ public class MInfoWindow extends X_AD_InfoWindow
 		// valid state
 		this.setIsValid(true);		
 	}
-
-	/**
-	 * IDEMPIERE-4167
-	 **/
-	private boolean m_validateEachColumn = true;
-
-	public void setIsValidateEachColumn (boolean validateEachColumn) {
-		m_validateEachColumn= validateEachColumn;
-	}
-
-	boolean isValidateEachColumn() {
-		return m_validateEachColumn;
-	}
-	
 	
 }	//	MInfoWindow
